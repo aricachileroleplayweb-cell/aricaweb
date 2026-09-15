@@ -103,6 +103,7 @@
             <div class="flex border-b border-white/10 pb-2">
                 <button onclick="switchAuthMode('login')" id="tab-login-btn" class="flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white">Iniciar Sesión</button>
                 <button onclick="switchAuthMode('register')" id="tab-reg-btn" class="flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent">Registrarse</button>
+                <button onclick="switchAuthMode('recovery')" id="tab-rec-btn" class="flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent">Recuperar</button>
             </div>
 
             <div id="form-login" class="space-y-4">
@@ -113,6 +114,9 @@
                 <div>
                     <label class="block text-[11px] font-medium text-gray-300 mb-1">Contraseña</label>
                     <input type="password" id="login-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="••••••••">
+                </div>
+                <div class="flex justify-between items-center text-[11px]">
+                    <button onclick="switchAuthMode('recovery')" class="text-blue-400 hover:underline">¿Olvidaste tu contraseña?</button>
                 </div>
                 <button onclick="handleLogin()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider">Entrar al Portal</button>
             </div>
@@ -127,6 +131,20 @@
                     <input type="password" id="reg-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="••••••••">
                 </div>
                 <button onclick="handleRegister()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider">Crear Cuenta</button>
+            </div>
+
+            <div id="form-recovery" class="space-y-4 hidden">
+                <p class="text-[11px] text-gray-300 text-center">Introduce tu Discord para asignar una nueva contraseña. Tienes un límite de 3 restablecimientos permitidos.</p>
+                <div>
+                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Nombre de Discord</label>
+                    <input type="text" id="rec-discord" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. Ignacio#1234">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Nueva Contraseña</label>
+                    <input type="password" id="rec-new-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Nueva contraseña">
+                </div>
+                <div id="rec-status-info" class="text-[10px] text-amber-300 text-center font-semibold"></div>
+                <button onclick="handleRecovery()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider text-amber-200">Restablecer Contraseña</button>
             </div>
         </div>
     </div>
@@ -154,7 +172,7 @@
                     <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Banco</button>
                     <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Concesionario</button>
                     <button onclick="switchTab('store')" id="btn-store" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Tienda</button>
-                    <button onclick="switchTab('cellphone')" id="btn-cellphone" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white hidden" id="nav-cell">Celular</button>
+                    <button onclick="switchTab('cellphone')" id="btn-cellphone" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Celular</button>
                     <button onclick="switchTab('police')" id="btn-police" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Policial</button>
                     <button onclick="switchTab('staff')" id="btn-staff" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Staff</button>
                     <button onclick="logoutSession()" class="glass-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 border-rose-500/30">Salir</button>
@@ -283,38 +301,7 @@
                         <h2 class="text-xl font-bold text-white">Tienda Oficial de Arica RP</h2>
                         <p class="text-xs text-gray-300 mt-1">Compra licencias e items vinculados a tu personaje activo.</p>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-bold text-white text-xs text-center">Licencia de Conducir Clase B</h3>
-                                <p class="text-[11px] text-gray-300 mt-2 text-center">Documento obligatorio para manejar automóviles legalmente.</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                                <span class="text-emerald-400 font-bold text-xs">$45.000 CLP</span>
-                                <button onclick="buyStoreItem('Licencia Clase B', 45000, 'license')" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
-                            </div>
-                        </div>
-                        <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-bold text-white text-xs text-center">iPhone 18 Pro Max</h3>
-                                <p class="text-[11px] text-gray-300 mt-2 text-center">Smartphone gama alta. Desbloquea acceso completo al Portal Celular.</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                                <span class="text-emerald-400 font-bold text-xs">$850.000 CLP</span>
-                                <button onclick="buyStoreItem('iPhone 18 Pro Max', 850000, 'phone')" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
-                            </div>
-                        </div>
-                        <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-bold text-white text-xs text-center">Kit de Mecánica Rápida</h3>
-                                <p class="text-[11px] text-gray-300 mt-2 text-center">Herramientas esenciales para reparaciones de emergencia.</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                                <span class="text-emerald-400 font-bold text-xs">$30.000 CLP</span>
-                                <button onclick="buyStoreItem('Kit de Mecánica', 30000, 'item')" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="store-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
                     <div class="mt-8 pt-6 border-t border-white/10">
                         <h3 class="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-3">Pertenencias del Personaje Activo</h3>
                         <div id="user-inventory" class="flex flex-wrap gap-2">
@@ -366,7 +353,7 @@
                 <div class="glass-card p-6 rounded-2xl">
                     <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
                         <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
-                        <p class="text-xs text-gray-300">Ingrese código de autorización policial para gestionar multas.</p>
+                        <p class="text-xs text-gray-300">Ingrese código de autorización policial para gestionar multas y condenas.</p>
                         <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Clave Policial">
                         <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Iniciar Sesión Policial</button>
                         <p id="police-error" class="text-rose-400 text-xs hidden">Clave incorrecta (Use: AricaPolice2026)</p>
@@ -375,7 +362,7 @@
                         <div class="flex justify-between items-center border-b border-white/10 pb-4">
                             <div>
                                 <h2 class="text-base font-bold text-white">Sistema Integrado Policial (SIP)</h2>
-                                <p class="text-xs text-gray-300">Control de antecedentes de la cuenta activa.</p>
+                                <p class="text-xs text-gray-300">Gestión de multas, antecedentes y órdenes de arresto.</p>
                             </div>
                             <button onclick="logoutPolice()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-300 border-rose-400/30">Cerrar Sesión</button>
                         </div>
@@ -402,16 +389,46 @@
                     <div id="staff-dashboard" class="hidden space-y-6">
                         <div class="flex justify-between items-center border-b border-white/10 pb-4">
                             <div>
-                                <h2 class="text-base font-bold text-white">Panel de Control Staff</h2>
-                                <p class="text-xs text-gray-300">Modifica vehículos del concesionario global.</p>
+                                <h2 class="text-base font-bold text-white">Panel de Control Global Staff</h2>
+                                <p class="text-xs text-gray-300">Control total de economía, vehículos, DNIs y tienda.</p>
                             </div>
                             <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-300 border-rose-400/30">Cerrar Sesión</button>
                         </div>
-                        <div class="glass-card p-4 rounded-xl space-y-3 max-w-lg mx-auto">
-                            <h3 class="text-xs font-bold text-white">Añadir Vehículo al Concesionario</h3>
-                            <input type="text" id="new-car-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Vehículo">
-                            <input type="number" id="new-car-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
-                            <button onclick="staffAddCar()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Publicar Vehículo</button>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
+                                <h3 class="text-xs font-bold text-amber-400">Gestión de Ciudadanos / DNIs</h3>
+                                <input type="text" id="staff-dni-target" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Ingrese DNI exacto (Ej. AR-123456)">
+                                <div class="flex gap-2">
+                                    <input type="number" id="staff-money-amount" class="glass-input flex-grow px-3 py-2 rounded-xl text-xs" placeholder="Monto CLP (+ o -)">
+                                    <button onclick="staffModifyMoney()" class="glass-btn px-3 py-2 rounded-xl text-[11px] font-semibold">Ajustar Saldo</button>
+                                </div>
+                                <button onclick="staffDeleteCharacter()" class="w-full py-2 bg-rose-600/30 hover:bg-rose-600/50 border border-rose-500/40 rounded-xl text-xs font-semibold text-rose-200">Eliminar este DNI / Personaje</button>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
+                                <h3 class="text-xs font-bold text-blue-400">Concesionario Global</h3>
+                                <input type="text" id="new-car-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Vehículo">
+                                <input type="number" id="new-car-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
+                                <button onclick="staffAddCar()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Añadir Vehículo</button>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
+                                <h3 class="text-xs font-bold text-emerald-400">Tienda Oficial</h3>
+                                <input type="text" id="new-store-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Ítem / Licencia">
+                                <input type="number" id="new-store-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
+                                <button onclick="staffAddStoreItem()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Añadir a la Tienda</button>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
+                                <h3 class="text-xs font-bold text-rose-400">Eliminar Catálogos</h3>
+                                <select id="staff-delete-catalog-select" class="glass-input w-full px-3 py-2 rounded-xl text-xs bg-slate-900">
+                                    <option value="cars">Vehículos del Concesionario</option>
+                                    <option value="store">Ítems de la Tienda</option>
+                                </select>
+                                <select id="staff-delete-item-select" class="glass-input w-full px-3 py-2 rounded-xl text-xs bg-slate-900"></select>
+                                <button onclick="staffDeleteItem()" class="w-full py-2 bg-rose-600/30 hover:bg-rose-600/50 border border-rose-500/40 rounded-xl text-xs font-semibold text-rose-200">Eliminar Elemento Seleccionado</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -429,14 +446,17 @@
         let currentDiscord = localStorage.getItem('arica_current_user') || null;
         let activePjId = localStorage.getItem('arica_active_pj') || null;
 
-        let globalState = {
+        let globalState = JSON.parse(localStorage.getItem('arica_global_state')) || {
             cars: [
                 { id: 1, name: "Nissan V16 Patrulla / Urbano", price: 2500000 },
                 { id: 2, name: "Toyota Hilux 4x4", price: 4800000 },
                 { id: 3, name: "Subaru Impreza WRX", price: 7200000 }
             ],
-            isStaff: false,
-            isPolice: false
+            storeItems: [
+                { id: 1, name: "Licencia de Conducir Clase B", price: 45000, type: "license", desc: "Documento obligatorio para automóviles." },
+                { id: 2, name: "iPhone 18 Pro Max", price: 850000, type: "phone", desc: "Smartphone gama alta con acceso celular." },
+                { id: 3, name: "Kit de Mecánica Rápida", price: 30000, type: "item", desc: "Herramientas de emergencia." }
+            ]
         };
 
         window.onload = function() {
@@ -445,17 +465,32 @@
             }
         };
 
+        function saveGlobalState() {
+            localStorage.setItem('arica_global_state', JSON.stringify(globalState));
+        }
+
         function switchAuthMode(mode) {
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+            const formRecovery = document.getElementById('form-recovery');
+
+            formLogin.classList.add('hidden');
+            formRegister.classList.add('hidden');
+            formRecovery.classList.add('hidden');
+
+            document.getElementById('tab-login-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
+            document.getElementById('tab-reg-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
+            document.getElementById('tab-rec-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
+
             if(mode === 'login') {
-                document.getElementById('form-login').classList.remove('hidden');
-                document.getElementById('form-register').classList.add('hidden');
+                formLogin.classList.remove('hidden');
                 document.getElementById('tab-login-btn').className = "flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white";
-                document.getElementById('tab-reg-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
-            } else {
-                document.getElementById('form-login').classList.add('hidden');
-                document.getElementById('form-register').classList.remove('hidden');
+            } else if(mode === 'register') {
+                formRegister.classList.remove('hidden');
                 document.getElementById('tab-reg-btn').className = "flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white";
-                document.getElementById('tab-login-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
+            } else if(mode === 'recovery') {
+                formRecovery.classList.remove('hidden');
+                document.getElementById('tab-rec-btn').className = "flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white";
             }
         }
 
@@ -475,8 +510,8 @@
 
             db[discord] = {
                 password: pass,
-                characters: [],
-                cars: []
+                recoveryCount: 0,
+                characters: []
             };
 
             saveDatabase();
@@ -496,6 +531,38 @@
             currentDiscord = discord;
             localStorage.setItem('arica_current_user', discord);
             initUserSession(discord);
+        }
+
+        function handleRecovery() {
+            const discord = document.getElementById('rec-discord').value.trim();
+            const newPass = document.getElementById('rec-new-pass').value.trim();
+
+            if(!discord || !newPass) {
+                alert("Introduce tu nombre de Discord y la nueva contraseña.");
+                return;
+            }
+
+            if(!db[discord]) {
+                alert("La cuenta de Discord especificada no existe en la base de datos.");
+                return;
+            }
+
+            // Inicializar contador si no existe
+            if(db[discord].recoveryCount === undefined) {
+                db[discord].recoveryCount = 0;
+            }
+
+            if(db[discord].recoveryCount >= 3) {
+                alert("Has alcanzado el límite máximo de 3 recuperaciones de contraseña permitidas para esta cuenta.");
+                return;
+            }
+
+            db[discord].recoveryCount += 1;
+            db[discord].password = newPass;
+            saveDatabase();
+
+            alert(`¡Contraseña restablecida con éxito! Usos de recuperación restantes: ${3 - db[discord].recoveryCount}`);
+            switchAuthMode('login');
         }
 
         function logoutSession() {
@@ -525,6 +592,7 @@
             renderDniCards();
             updateBankUI();
             renderInventory();
+            renderStore();
             switchTab('identity');
         }
 
@@ -545,6 +613,8 @@
             if(activeBtn) activeBtn.classList.add('bg-white/25', 'border-white/50');
 
             if(tabId === 'dealership') renderDealership();
+            if(tabId === 'store') renderStore();
+            if(tabId === 'staff') updateStaffDeleteDropdown();
         }
 
         function registerCharacter() {
@@ -577,7 +647,10 @@
                     { text: "Bono de Bienvenida Inicial", amount: "+ $800.000", type: "income" }
                 ],
                 inventory: [],
-                criminalStatus: 'Sin Antecedentes'
+                criminalStatus: 'Sin Antecedentes',
+                fines: [],
+                records: [],
+                jail: 0
             };
 
             userChars.push(newDni);
@@ -641,7 +714,7 @@
         }
 
         function getActiveCharacter() {
-            if(!currentDiscord || !activePjId) return null;
+            if(!currentDiscord || !activePjId || !db[currentDiscord]) return null;
             return db[currentDiscord].characters.find(c => c.id === activePjId);
         }
 
@@ -650,8 +723,11 @@
             container.innerHTML = '';
             const userChars = db[currentDiscord].characters;
 
-            userChars.forEach((char, index) => {
+            userChars.forEach((char) => {
                 const isActive = char.id === activePjId;
+                let finesHtml = char.fines && char.fines.length > 0 ? char.fines.map(f => `<p class="text-rose-300">• $${f.amount.toLocaleString()} - ${f.reason}</p>`).join('') : '<p class="text-gray-400">Sin multas activas</p>';
+                let jailHtml = char.jail > 0 ? `<p class="text-amber-400 font-bold">⚠️ Condena Prisión / Cárcel: ${char.jail} meses</p>` : `<p class="text-emerald-300">Libre</p>`;
+
                 container.innerHTML += `
                     <div class="glass-card p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between bg-slate-950/70 border ${isActive ? 'border-emerald-500/60 shadow-emerald-900/30 shadow-lg' : 'border-white/20'}">
                         <div class="flex justify-between items-start">
@@ -661,11 +737,16 @@
                             </div>
                             <img src="arica logo.png" class="w-8 h-8 rounded-full object-cover border border-white/40">
                         </div>
-                        <div class="grid grid-cols-2 gap-2 my-4 text-[11px] text-gray-200">
+                        <div class="grid grid-cols-2 gap-2 my-3 text-[11px] text-gray-200">
                             <p><b>DNI:</b> ${char.id}</p>
                             <p><b>Edad:</b> ${char.age} años</p>
                             <p><b>Género:</b> ${char.gender}</p>
                             <p><b>Estado:</b> <span class="text-emerald-300 font-semibold">${char.criminalStatus}</span></p>
+                        </div>
+                        <div class="my-2 p-2 rounded bg-black/40 text-[10px] space-y-1 border border-white/10">
+                            <p class="font-bold text-gray-300">Multas:</p>
+                            ${finesHtml}
+                            <div class="mt-1">${jailHtml}</div>
                         </div>
                         <div class="flex justify-between items-center pt-2 border-t border-white/10 text-[10px]">
                             <span class="${isActive ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${isActive ? 'Personaje Activo' : 'Personaje Secundario'}</span>
@@ -755,7 +836,26 @@
             }
         }
 
-        function buyStoreItem(name, price, type) {
+        function renderStore() {
+            const grid = document.getElementById('store-grid');
+            grid.innerHTML = '';
+            globalState.storeItems.forEach(item => {
+                grid.innerHTML += `
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-white text-xs text-center">${item.name}</h3>
+                            <p class="text-[11px] text-gray-300 mt-2 text-center">${item.desc}</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-xs">$${item.price.toLocaleString('es-CL')} CLP</span>
+                            <button onclick="buyStoreItem('${item.name}', ${item.price})" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function buyStoreItem(name, price) {
             const char = getActiveCharacter();
             if(!char) { alert("Seleccione un personaje activo para realizar la compra."); return; }
 
@@ -861,33 +961,112 @@
 
             let allChars = [];
             Object.keys(db).forEach(user => {
-                db[user].characters.forEach(c => allChars.push(c));
+                db[user].characters.forEach(c => allChars.push({ user, char: c }));
             });
 
-            const found = allChars.filter(c => c.name.toLowerCase().includes(query) || c.id.toLowerCase().includes(query));
+            const found = allChars.filter(item => item.char.name.toLowerCase().includes(query) || item.char.id.toLowerCase().includes(query));
 
             if(found.length === 0) {
                 resultBox.innerHTML = '<p class="text-xs text-rose-400 text-center py-2">No se encontró ningún ciudadano con ese registro.</p>';
                 return;
             }
 
-            found.forEach(char => {
+            found.forEach(item => {
+                const char = item.char;
                 resultBox.innerHTML += `
-                    <div class="glass-card p-4 rounded-xl space-y-2">
-                        <div class="flex justify-between items-center">
+                    <div class="glass-card p-4 rounded-xl space-y-3" id="police-card-${char.id}">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
                             <h4 class="font-bold text-white text-xs">${char.name} ${char.lastname} (${char.id})</h4>
                             <span class="px-2 py-0.5 rounded text-[9px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30">${char.criminalStatus}</span>
                         </div>
-                        <p class="text-[11px] text-gray-300">Saldo Bancario: $${char.balance.toLocaleString('es-CL')}</p>
+                        <div class="text-[11px] text-gray-300 space-y-1">
+                            <p><b>Saldo:</b> $${char.balance.toLocaleString('es-CL')}</p>
+                            <p><b>Cárcel Actual:</b> <span class="text-amber-400 font-bold">${char.jail} meses</span></p>
+                            <p><b>Antecedentes:</b> ${char.records && char.records.length > 0 ? char.records.join(', ') : 'Ninguno'}</p>
+                        </div>
+                        <div class="pt-2 border-t border-white/10 space-y-2">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="police-fine-reason-${char.id}" class="glass-input px-2 py-1.5 rounded text-[10px]" placeholder="Motivo de multa">
+                                <input type="number" id="police-fine-amount-${char.id}" class="glass-input px-2 py-1.5 rounded text-[10px]" placeholder="Monto multa ($)">
+                            </div>
+                            <button onclick="policeAddFine('${char.id}')" class="w-full glass-btn py-1.5 rounded text-[10px] font-semibold">Aplicar Multa</button>
+
+                            <div class="grid grid-cols-2 gap-2 mt-2">
+                                <input type="text" id="police-record-text-${char.id}" class="glass-input px-2 py-1.5 rounded text-[10px]" placeholder="Nuevo antecedente">
+                                <button onclick="policeAddRecord('${char.id}')" class="glass-btn py-1.5 rounded text-[10px] font-semibold">Añadir Antecedente</button>
+                            </div>
+
+                            <div class="flex gap-2 mt-2">
+                                <input type="number" id="police-jail-months-${char.id}" class="glass-input flex-grow px-2 py-1.5 rounded text-[10px]" placeholder="Meses de prisión preventiva / cárcel">
+                                <button onclick="policeSetJail('${char.id}')" class="glass-btn px-3 py-1.5 rounded text-[10px] font-semibold bg-amber-600/30 text-amber-200">Asignar Condena</button>
+                            </div>
+                        </div>
                     </div>
                 `;
             });
+        }
+
+        function policeAddFine(dni) {
+            const reason = document.getElementById(`police-fine-reason-${dni}`).value.trim();
+            const amount = parseInt(document.getElementById(`police-fine-amount-${dni}`).value);
+
+            if(!reason || isNaN(amount)) { alert("Complete motivo y monto de la multa."); return; }
+
+            for(let user in db) {
+                let char = db[user].characters.find(c => c.id === dni);
+                if(char) {
+                    if(!char.fines) char.fines = [];
+                    char.fines.push({ reason, amount });
+                    char.balance -= amount;
+                    char.transactions.unshift({ text: `Multa Policial: ${reason}`, amount: `- $${amount.toLocaleString()}`, type: "expense" });
+                    saveDatabase();
+                    alert("Multa aplicada con éxito al ciudadano.");
+                    searchCitizenPolice();
+                    return;
+                }
+            }
+        }
+
+        function policeAddRecord(dni) {
+            const text = document.getElementById(`police-record-text-${dni}`).value.trim();
+            if(!text) { alert("Escriba el antecedente."); return; }
+
+            for(let user in db) {
+                let char = db[user].characters.find(c => c.id === dni);
+                if(char) {
+                    if(!char.records) char.records = [];
+                    char.records.push(text);
+                    char.criminalStatus = 'Con Antecedentes';
+                    saveDatabase();
+                    alert("Antecedente registrado correctamente.");
+                    searchCitizenPolice();
+                    return;
+                }
+            }
+        }
+
+        function policeSetJail(dni) {
+            const months = parseInt(document.getElementById(`police-jail-months-${dni}`).value);
+            if(isNaN(months)) { alert("Ingrese cantidad de meses."); return; }
+
+            for(let user in db) {
+                let char = db[user].characters.find(c => c.id === dni);
+                if(char) {
+                    char.jail = months;
+                    char.criminalStatus = months > 0 ? 'En Prisión Preventiva' : 'Sin Antecedentes';
+                    saveDatabase();
+                    alert(`Condena actualizada a ${months} meses de cárcel.`);
+                    searchCitizenPolice();
+                    return;
+                }
+            }
         }
 
         function loginStaff() {
             if(document.getElementById('staff-pass').value === 'AricaWeb2026') {
                 document.getElementById('staff-login-box').classList.add('hidden');
                 document.getElementById('staff-dashboard').classList.remove('hidden');
+                updateStaffDeleteDropdown();
             } else {
                 document.getElementById('staff-error').classList.remove('hidden');
             }
@@ -899,20 +1078,116 @@
             document.getElementById('staff-pass').value = '';
         }
 
+        function staffModifyMoney() {
+            const dni = document.getElementById('staff-dni-target').value.trim();
+            const amount = parseInt(document.getElementById('staff-money-amount').value);
+
+            if(!dni || isNaN(amount)) { alert("Ingrese DNI válido y monto."); return; }
+
+            let found = false;
+            for(let user in db) {
+                let char = db[user].characters.find(c => c.id === dni);
+                if(char) {
+                    char.balance += amount;
+                    char.transactions.unshift({ text: "Ajuste Administrativo Staff", amount: `${amount >= 0 ? '+' : ''} $${amount.toLocaleString()}`, type: amount >= 0 ? 'income' : 'expense' });
+                    saveDatabase();
+                    found = true;
+                    alert(`Saldo modificado con éxito para ${char.name}. Nuevo saldo: $${char.balance.toLocaleString()}`);
+                    updateBankUI();
+                    break;
+                }
+            }
+            if(!found) alert("No se encontró ningún personaje con ese DNI.");
+        }
+
+        function staffDeleteCharacter() {
+            const dni = document.getElementById('staff-dni-target').value.trim();
+            if(!dni) { alert("Ingrese el DNI del personaje a eliminar."); return; }
+            if(!confirm(`¿Estás seguro de eliminar permanentemente el DNI ${dni}?`)) return;
+
+            let deleted = false;
+            for(let user in db) {
+                let index = db[user].characters.findIndex(c => c.id === dni);
+                if(index !== -1) {
+                    db[user].characters.splice(index, 1);
+                    saveDatabase();
+                    deleted = true;
+                    alert("Personaje eliminado correctamente.");
+                    if(activePjId === dni) {
+                        activePjId = db[user].characters.length > 0 ? db[user].characters[0].id : null;
+                        localStorage.setItem('arica_active_pj', activePjId);
+                    }
+                    initUserSession(currentDiscord);
+                    break;
+                }
+            }
+            if(!deleted) alert("DNI no encontrado.");
+        }
+
         function staffAddCar() {
             const name = document.getElementById('new-car-name').value.trim();
             const price = parseInt(document.getElementById('new-car-price').value);
 
-            if(!name || isNaN(price)) {
-                alert("Complete los datos del vehículo.");
-                return;
-            }
+            if(!name || isNaN(price)) { alert("Complete los datos del vehículo."); return; }
 
-            globalState.cars.push({ id: globalState.cars.length + 1, name: name, price: price });
+            globalState.cars.push({ id: Date.now(), name: name, price: price });
+            saveGlobalState();
             alert("Vehículo agregado al concesionario global.");
             document.getElementById('new-car-name').value = '';
             document.getElementById('new-car-price').value = '';
             renderDealership();
+        }
+
+        function staffAddStoreItem() {
+            const name = document.getElementById('new-store-name').value.trim();
+            const price = parseInt(document.getElementById('new-store-price').value);
+
+            if(!name || isNaN(price)) { alert("Complete los datos del ítem."); return; }
+
+            globalState.storeItems.push({ id: Date.now(), name: name, price: price, type: 'item', desc: 'Objeto oficial de tienda.' });
+            saveGlobalState();
+            alert("Ítem añadido a la tienda con éxito.");
+            document.getElementById('new-store-name').value = '';
+            document.getElementById('new-store-price').value = '';
+            renderStore();
+            updateStaffDeleteDropdown();
+        }
+
+        function updateStaffDeleteDropdown() {
+            const catalog = document.getElementById('staff-delete-catalog-select').value;
+            const select = document.getElementById('staff-delete-item-select');
+            select.innerHTML = '';
+
+            if(catalog === 'cars') {
+                globalState.cars.forEach(car => {
+                    select.innerHTML += `<option value="${car.id}">${car.name} ($${car.price.toLocaleString()})</option>`;
+                });
+            } else {
+                globalState.storeItems.forEach(item => {
+                    select.innerHTML += `<option value="${item.id}">${item.name} ($${item.price.toLocaleString()})</option>`;
+                });
+            }
+        }
+
+        document.getElementById('staff-delete-catalog-select').addEventListener('change', updateStaffDeleteDropdown);
+
+        function staffDeleteItem() {
+            const catalog = document.getElementById('staff-delete-catalog-select').value;
+            const id = parseInt(document.getElementById('staff-delete-item-select').value);
+
+            if(isNaN(id)) { alert("Seleccione un elemento válido."); return; }
+
+            if(catalog === 'cars') {
+                globalState.cars = globalState.cars.filter(c => c.id !== id);
+                alert("Vehículo eliminado del concesionario.");
+            } else {
+                globalState.storeItems = globalState.storeItems.filter(i => i.id !== id);
+                alert("Ítem eliminado de la tienda.");
+            }
+            saveGlobalState();
+            renderDealership();
+            renderStore();
+            updateStaffDeleteDropdown();
         }
     </script>
 </body>
