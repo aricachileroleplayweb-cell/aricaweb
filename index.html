@@ -143,7 +143,6 @@
                     <label class="block text-[11px] font-medium text-gray-300 mb-1">Nueva Contraseña</label>
                     <input type="password" id="rec-new-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Nueva contraseña">
                 </div>
-                <div id="rec-status-info" class="text-[10px] text-amber-300 text-center font-semibold"></div>
                 <button onclick="handleRecovery()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider text-amber-200">Restablecer Contraseña</button>
             </div>
         </div>
@@ -395,6 +394,15 @@
                             <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-300 border-rose-400/30">Cerrar Sesión</button>
                         </div>
 
+                        <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/60 border border-amber-500/30">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider">📋 Auditoría Global: DNIs por Usuario de Discord</h3>
+                                <button onclick="renderStaffDiscordList()" class="glass-btn px-3 py-1 rounded text-[10px] text-amber-200">Actualizar Lista</button>
+                            </div>
+                            <p class="text-[11px] text-gray-300">Revisa aquí qué cuentas de Discord han creado DNIs y verifica si pertenecen al servidor oficial de Discord.</p>
+                            <div id="staff-discord-audit-list" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+                        </div>
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
                                 <h3 class="text-xs font-bold text-amber-400">Gestión de Ciudadanos / DNIs</h3>
@@ -547,7 +555,6 @@
                 return;
             }
 
-            // Inicializar contador si no existe
             if(db[discord].recoveryCount === undefined) {
                 db[discord].recoveryCount = 0;
             }
@@ -614,7 +621,10 @@
 
             if(tabId === 'dealership') renderDealership();
             if(tabId === 'store') renderStore();
-            if(tabId === 'staff') updateStaffDeleteDropdown();
+            if(tabId === 'staff') {
+                updateStaffDeleteDropdown();
+                renderStaffDiscordList();
+            }
         }
 
         function registerCharacter() {
@@ -1067,6 +1077,7 @@
                 document.getElementById('staff-login-box').classList.add('hidden');
                 document.getElementById('staff-dashboard').classList.remove('hidden');
                 updateStaffDeleteDropdown();
+                renderStaffDiscordList();
             } else {
                 document.getElementById('staff-error').classList.remove('hidden');
             }
@@ -1076,6 +1087,54 @@
             document.getElementById('staff-login-box').classList.remove('hidden');
             document.getElementById('staff-dashboard').classList.add('hidden');
             document.getElementById('staff-pass').value = '';
+        }
+
+        /* FUNCIÓN DE AUDITORÍA: LISTAR DNIs POR USUARIO DE DISCORD */
+        function renderStaffDiscordList() {
+            const container = document.getElementById('staff-discord-audit-list');
+            container.innerHTML = '';
+
+            const users = Object.keys(db);
+            if(users.length === 0) {
+                container.innerHTML = '<p class="text-xs text-gray-400 text-center py-3">No hay cuentas de usuario registradas en el portal.</p>';
+                return;
+            }
+
+            users.forEach(discordTag => {
+                const userData = db[discordTag];
+                const chars = userData.characters || [];
+                const recCount = userData.recoveryCount || 0;
+
+                let charsHtml = '';
+                if(chars.length === 0) {
+                    charsHtml = '<p class="text-[10px] text-gray-400 italic">Este usuario aún no ha creado ningún DNI.</p>';
+                } else {
+                    charsHtml = chars.map(c => `
+                        <div class="flex justify-between items-center bg-black/40 px-3 py-1.5 rounded-lg border border-white/10 text-[11px]">
+                            <div>
+                                <span class="font-bold text-white">${c.name} ${c.lastname}</span> 
+                                <span class="text-amber-300 font-mono text-[10px]">(${c.id})</span>
+                            </div>
+                            <div class="text-right text-[10px] text-gray-300">
+                                <span>Saldo: $${c.balance.toLocaleString()}</span> | 
+                                <button onclick="document.getElementById('staff-dni-target').value='${c.id}'; window.scrollTo({top: 400, behavior:'smooth'});" class="text-blue-400 hover:underline ml-1 font-semibold">Gestionar</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                container.innerHTML += `
+                    <div class="glass-card p-3.5 rounded-xl space-y-2 bg-slate-900/80 border border-white/15">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-1.5">
+                            <span class="font-bold text-xs text-amber-400">👤 Discord: ${discordTag}</span>
+                            <span class="text-[10px] text-gray-400">Recuperaciones clave: <b class="text-white">${recCount}/3</b> | Total DNIs: <b class="text-emerald-400">${chars.length}/2</b></span>
+                        </div>
+                        <div class="space-y-1">
+                            ${charsHtml}
+                        </div>
+                    </div>
+                `;
+            });
         }
 
         function staffModifyMoney() {
@@ -1094,6 +1153,7 @@
                     found = true;
                     alert(`Saldo modificado con éxito para ${char.name}. Nuevo saldo: $${char.balance.toLocaleString()}`);
                     updateBankUI();
+                    renderStaffDiscordList();
                     break;
                 }
             }
@@ -1117,7 +1177,8 @@
                         activePjId = db[user].characters.length > 0 ? db[user].characters[0].id : null;
                         localStorage.setItem('arica_active_pj', activePjId);
                     }
-                    initUserSession(currentDiscord);
+                    if(currentDiscord) initUserSession(currentDiscord);
+                    renderStaffDiscordList();
                     break;
                 }
             }
