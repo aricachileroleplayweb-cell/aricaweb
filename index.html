@@ -352,10 +352,9 @@
                 <div class="glass-card p-6 rounded-2xl">
                     <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
                         <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
-                        <p class="text-xs text-gray-300">Ingrese código de autorización policial para gestionar multas y condenas.</p>
+                        <p class="text-xs text-gray-300">Ingrese cualquier clave para acceder al sistema policial.</p>
                         <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Clave Policial">
                         <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Iniciar Sesión Policial</button>
-                        <p id="police-error" class="text-rose-400 text-xs hidden">Clave incorrecta (Use: AricaPolice2026)</p>
                     </div>
                     <div id="police-dashboard" class="hidden space-y-6">
                         <div class="flex justify-between items-center border-b border-white/10 pb-4">
@@ -383,7 +382,6 @@
                         <p class="text-xs text-gray-300">Acceso exclusivo para administradores de Arica RP.</p>
                         <input type="password" id="staff-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Contraseña Staff">
                         <button onclick="loginStaff()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Acceder al Panel</button>
-                        <p id="staff-error" class="text-rose-400 text-xs hidden">Contraseña incorrecta (Use: AricaWeb2026)</p>
                     </div>
                     <div id="staff-dashboard" class="hidden space-y-6">
                         <div class="flex justify-between items-center border-b border-white/10 pb-4">
@@ -950,12 +948,9 @@
         }
 
         function loginPolice() {
-            if(document.getElementById('police-pass').value === 'AricaPolice2026') {
-                document.getElementById('police-login-box').classList.add('hidden');
-                document.getElementById('police-dashboard').classList.remove('hidden');
-            } else {
-                document.getElementById('police-error').classList.remove('hidden');
-            }
+            // Acceso libre sin restricción de contraseña
+            document.getElementById('police-login-box').classList.add('hidden');
+            document.getElementById('police-dashboard').classList.remove('hidden');
         }
 
         function logoutPolice() {
@@ -1073,14 +1068,11 @@
         }
 
         function loginStaff() {
-            if(document.getElementById('staff-pass').value === 'AricaWeb2026') {
-                document.getElementById('staff-login-box').classList.add('hidden');
-                document.getElementById('staff-dashboard').classList.remove('hidden');
-                updateStaffDeleteDropdown();
-                renderStaffDiscordList();
-            } else {
-                document.getElementById('staff-error').classList.remove('hidden');
-            }
+            // Acceso libre sin restricción de contraseña
+            document.getElementById('staff-login-box').classList.add('hidden');
+            document.getElementById('staff-dashboard').classList.remove('hidden');
+            updateStaffDeleteDropdown();
+            renderStaffDiscordList();
         }
 
         function logoutStaff() {
@@ -1089,7 +1081,6 @@
             document.getElementById('staff-pass').value = '';
         }
 
-        /* FUNCIÓN DE AUDITORÍA: LISTAR DNIs POR USUARIO DE DISCORD */
         function renderStaffDiscordList() {
             const container = document.getElementById('staff-discord-audit-list');
             container.innerHTML = '';
