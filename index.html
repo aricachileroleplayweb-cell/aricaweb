@@ -251,8 +251,7 @@
                             </div>
                         </div>
                         <div class="mt-6 pt-4 border-t border-white/10 flex gap-2">
-                            <button onclick="simulateDeposit()" class="flex-1 glass-btn py-2 rounded-xl text-[11px] font-semibold">Simular Ingreso</button>
-                            <button onclick="simulateWithdraw()" class="flex-1 glass-btn py-2 rounded-xl text-[11px] font-semibold">Girar Dinero</button>
+                            <button onclick="simulateWithdraw()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Girar Dinero</button>
                         </div>
                     </div>
 
@@ -791,15 +790,6 @@
             });
         }
 
-        function simulateDeposit() {
-            const char = getActiveCharacter();
-            if(!char) { alert("Seleccione un personaje activo primero."); return; }
-            char.balance += 50000;
-            char.transactions.unshift({ text: "Depósito en Cajero Automático", amount: "+ $50.000", type: "income" });
-            saveDatabase();
-            updateBankUI();
-        }
-
         function simulateWithdraw() {
             const char = getActiveCharacter();
             if(!char) { alert("Seleccione un personaje activo primero."); return; }
@@ -948,7 +938,6 @@
         }
 
         function loginPolice() {
-            // Acceso libre sin restricción de contraseña
             document.getElementById('police-login-box').classList.add('hidden');
             document.getElementById('police-dashboard').classList.remove('hidden');
         }
@@ -1068,7 +1057,6 @@
         }
 
         function loginStaff() {
-            // Acceso libre sin restricción de contraseña
             document.getElementById('staff-login-box').classList.add('hidden');
             document.getElementById('staff-dashboard').classList.remove('hidden');
             updateStaffDeleteDropdown();
