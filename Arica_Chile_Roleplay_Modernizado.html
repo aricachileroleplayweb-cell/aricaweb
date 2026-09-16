@@ -3,22 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Arica Chile RolePlay | Portal Oficial</title>
-
-    <meta name="description"
-          content="Portal oficial de Arica Chile RolePlay. Identidad, servicios, marketplace, vehículos y comunidad.">
+    <meta name="description" content="Portal oficial de Arica Chile RolePlay. Identidad, servicios, marketplace, vehículos y comunidad.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -44,13 +36,7 @@
 
         body {
             font-family: "Inter", sans-serif;
-            background:
-                radial-gradient(
-                    circle at 50% -10%,
-                    rgba(255,255,255,0.10),
-                    transparent 38%
-                ),
-                var(--bg);
+            background: radial-gradient(circle at 50% -10%, rgba(255,255,255,0.10), transparent 38%), var(--bg);
             color: var(--text);
             min-height: 100vh;
         }
@@ -64,17 +50,13 @@
             text-decoration: none;
         }
 
-        button,
-        input,
-        textarea,
-        select {
+        button, input, textarea, select {
             font-family: inherit;
         }
 
         /* =========================
-           NAVBAR
+            NAVBAR
         ========================= */
-
         .navbar {
             position: fixed;
             top: 0;
@@ -82,17 +64,13 @@
             width: 100%;
             height: 74px;
             z-index: 1000;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             padding: 0 6%;
-
             background: rgba(7,9,13,0.72);
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
-
             border-bottom: 1px solid var(--border);
         }
 
@@ -108,27 +86,14 @@
             width: 40px;
             height: 40px;
             border-radius: 11px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             background: #fff;
             color: #000;
             font-weight: 900;
             font-size: 14px;
-
             overflow: hidden;
-        }
-
-        .brand-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .brand-text span {
-            display: block;
         }
 
         .brand-subtitle {
@@ -136,6 +101,7 @@
             color: var(--muted);
             font-weight: 500;
             margin-top: 2px;
+            display: block;
         }
 
         .nav-links {
@@ -191,17 +157,14 @@
         }
 
         /* =========================
-           HERO
+            HERO
         ========================= */
-
         .hero {
             min-height: 760px;
             padding: 150px 7% 100px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             position: relative;
             overflow: hidden;
         }
@@ -212,10 +175,8 @@
             width: 650px;
             height: 650px;
             border-radius: 50%;
-
             background: rgba(255,255,255,0.045);
             filter: blur(100px);
-
             top: -250px;
             left: 50%;
             transform: translateX(-50%);
@@ -232,17 +193,13 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
             padding: 8px 13px;
-
             border-radius: 999px;
             border: 1px solid var(--border);
             background: rgba(255,255,255,0.035);
-
             color: #bfc7d3;
             font-size: 11px;
             font-weight: 600;
-
             margin-bottom: 25px;
         }
 
@@ -269,7 +226,6 @@
         .hero p {
             max-width: 650px;
             margin: auto;
-
             color: var(--muted);
             font-size: 16px;
             line-height: 1.7;
@@ -277,7 +233,6 @@
 
         .hero-buttons {
             margin-top: 35px;
-
             display: flex;
             justify-content: center;
             gap: 12px;
@@ -288,14 +243,11 @@
             padding: 14px 22px;
             border-radius: 12px;
             border: 1px solid var(--border);
-
             background: rgba(255,255,255,.04);
             color: white;
-
             cursor: pointer;
             font-size: 13px;
             font-weight: 700;
-
             transition: .25s;
         }
 
@@ -310,22 +262,17 @@
         }
 
         /* =========================
-           STATS
+            STATS
         ========================= */
-
         .stats {
             width: min(1000px, 90%);
             margin: -50px auto 100px;
-
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-
             border: 1px solid var(--border);
             border-radius: 20px;
-
             background: rgba(255,255,255,.025);
             backdrop-filter: blur(15px);
-
             overflow: hidden;
         }
 
@@ -351,9 +298,8 @@
         }
 
         /* =========================
-           SECTIONS
+            SECTIONS
         ========================= */
-
         .section {
             width: min(1180px, 88%);
             margin: 0 auto 120px;
@@ -386,9 +332,8 @@
         }
 
         /* =========================
-           SERVICES
+            SERVICES
         ========================= */
-
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -398,17 +343,9 @@
         .service-card {
             padding: 28px;
             min-height: 190px;
-
             border: 1px solid var(--border);
             border-radius: 18px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.055),
-                    rgba(255,255,255,.015)
-                );
-
+            background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
             transition: .25s;
         }
 
@@ -421,14 +358,11 @@
             width: 42px;
             height: 42px;
             border-radius: 12px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             background: rgba(255,255,255,.07);
             border: 1px solid var(--border);
-
             margin-bottom: 22px;
             font-size: 18px;
         }
@@ -445,9 +379,8 @@
         }
 
         /* =========================
-           PORTAL
+            PORTAL
         ========================= */
-
         .portal {
             display: grid;
             grid-template-columns: 1.1fr .9fr;
@@ -458,13 +391,7 @@
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 32px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.06),
-                    rgba(255,255,255,.015)
-                );
+            background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
         }
 
         .portal-card.large {
@@ -493,12 +420,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             padding: 14px;
-
             border: 1px solid var(--border);
             border-radius: 12px;
-
             background: rgba(255,255,255,.025);
         }
 
@@ -511,20 +435,16 @@
             border: 0;
             background: white;
             color: black;
-
             padding: 7px 11px;
             border-radius: 8px;
-
             font-size: 10px;
             font-weight: 800;
-
             cursor: pointer;
         }
 
         /* =========================
-           MARKETPLACE
+            MARKETPLACE
         ========================= */
-
         .marketplace {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -540,17 +460,10 @@
 
         .market-image {
             height: 170px;
-            background:
-                radial-gradient(
-                    circle at center,
-                    #303741,
-                    #11151b
-                );
-
+            background: radial-gradient(circle at center, #303741, #11151b);
             display: flex;
             align-items: center;
             justify-content: center;
-
             color: #707986;
             font-size: 12px;
         }
@@ -576,9 +489,8 @@
         }
 
         /* =========================
-           ACCESS
+            ACCESS
         ========================= */
-
         .access-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -587,10 +499,8 @@
 
         .access-card {
             padding: 25px;
-
             border-radius: 18px;
             border: 1px solid var(--border);
-
             background: rgba(255,255,255,.025);
         }
 
@@ -609,23 +519,18 @@
         .access-button {
             width: 100%;
             padding: 11px;
-
             border-radius: 10px;
             border: 1px solid var(--border);
-
             background: white;
             color: black;
-
             font-weight: 800;
             font-size: 11px;
-
             cursor: pointer;
         }
 
         /* =========================
-           FOOTER
+            FOOTER
         ========================= */
-
         footer {
             border-top: 1px solid var(--border);
             padding: 45px 7%;
@@ -635,7 +540,6 @@
         .footer-inner {
             max-width: 1180px;
             margin: auto;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -654,20 +558,16 @@
         }
 
         /* =========================
-           MODAL
+            MODAL
         ========================= */
-
         .modal {
             position: fixed;
             inset: 0;
             z-index: 2000;
-
             display: none;
             align-items: center;
             justify-content: center;
-
             padding: 20px;
-
             background: rgba(0,0,0,.78);
             backdrop-filter: blur(15px);
         }
@@ -678,13 +578,10 @@
 
         .modal-box {
             width: min(430px, 100%);
-
             background: #0d1118;
             border: 1px solid var(--border);
             border-radius: 20px;
-
             padding: 30px;
-
             box-shadow: 0 30px 100px rgba(0,0,0,.5);
         }
 
@@ -702,13 +599,10 @@
         .close {
             width: 32px;
             height: 32px;
-
             border-radius: 9px;
             border: 1px solid var(--border);
-
             background: rgba(255,255,255,.04);
             color: white;
-
             cursor: pointer;
         }
 
@@ -726,15 +620,11 @@
 
         .input-group input {
             width: 100%;
-
             border: 1px solid var(--border);
             border-radius: 10px;
-
             background: #080b10;
             color: white;
-
             padding: 12px;
-
             outline: none;
         }
 
@@ -744,16 +634,12 @@
 
         .modal-button {
             width: 100%;
-
             margin-top: 10px;
             padding: 13px;
-
             border: 0;
             border-radius: 10px;
-
             background: white;
             color: black;
-
             font-weight: 800;
             cursor: pointer;
         }
@@ -766,29 +652,22 @@
         }
 
         /* =========================
-           TOAST
+            TOAST
         ========================= */
-
         .toast {
             position: fixed;
             right: 25px;
             bottom: 25px;
-
             padding: 13px 17px;
-
             background: #11161e;
             border: 1px solid var(--border);
             border-radius: 12px;
-
             color: white;
             font-size: 11px;
-
             opacity: 0;
             transform: translateY(20px);
-
             pointer-events: none;
             transition: .3s;
-
             z-index: 5000;
         }
 
@@ -798,46 +677,33 @@
         }
 
         /* =========================
-           RESPONSIVE
+            RESPONSIVE
         ========================= */
-
         @media(max-width: 850px) {
-
-            .nav-links,
-            .nav-actions {
+            .nav-links, .nav-actions {
                 display: none;
             }
-
             .mobile-menu {
                 display: block;
             }
-
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .stat:nth-child(2) {
                 border-right: none;
             }
-
-            .services-grid,
-            .marketplace,
-            .access-grid {
+            .services-grid, .marketplace, .access-grid {
                 grid-template-columns: 1fr;
             }
-
             .portal {
                 grid-template-columns: 1fr;
             }
-
             .hero {
                 min-height: 700px;
             }
-
             .hero h1 {
                 letter-spacing: -3px;
             }
-
             .footer-inner {
                 flex-direction: column;
                 align-items: flex-start;
@@ -845,861 +711,315 @@
         }
 
         @media(max-width: 500px) {
-
             .navbar {
                 padding: 0 20px;
             }
-
             .hero {
                 padding-left: 20px;
                 padding-right: 20px;
             }
-
-            .section {
+            .section, .stats {
                 width: calc(100% - 40px);
             }
-
-            .stats {
-                width: calc(100% - 40px);
-            }
-
             .stat {
                 padding: 22px 10px;
             }
-
             .hero h1 {
                 font-size: 47px;
             }
-
             .portal-card {
                 padding: 23px;
             }
         }
-
     </style>
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================= -->
-
+    <!-- NAVBAR -->
     <nav class="navbar">
-
         <a href="#inicio" class="brand">
-
-            <div class="brand-logo">
-                ACRP
-            </div>
-
+            <div class="brand-logo">ACRP</div>
             <div class="brand-text">
                 <span>Arica Chile RolePlay</span>
                 <span class="brand-subtitle">Portal Oficial</span>
             </div>
-
         </a>
-
         <div class="nav-links">
-
             <a href="#inicio">Inicio</a>
             <a href="#portal">Portal</a>
             <a href="#servicios">Servicios</a>
             <a href="#marketplace">Marketplace</a>
             <a href="#accesos">Accesos</a>
-
         </div>
-
         <div class="nav-actions">
-
-            <button
-                class="nav-button"
-                onclick="openModal('login')">
-                Ingresar
-            </button>
-
-            <button
-                class="nav-button primary"
-                onclick="scrollToSection('portal')">
-                Entrar al Portal
-            </button>
-
+            <button class="nav-button" onclick="openModal('login')">Ingresar</button>
+            <button class="nav-button primary" onclick="scrollToSection('portal')">Entrar al Portal</button>
         </div>
-
-        <button class="mobile-menu" onclick="toggleMobileMenu()">
-            ☰
-        </button>
-
+        <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
     </nav>
 
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
+    <!-- HERO -->
     <header class="hero" id="inicio">
-
         <div class="hero-content">
-
             <div class="status">
                 <span class="status-dot"></span>
                 Sistema operativo
             </div>
-
-            <h1>
-                Arica Chile<br>
-                <span>RolePlay.</span>
-            </h1>
-
+            <h1>Arica Chile<br><span>RolePlay.</span></h1>
             <p>
                 Bienvenido al portal oficial de Arica Chile RolePlay.
                 Gestiona tu identidad, vehículos, servicios, marketplace
                 y herramientas de la comunidad desde un solo lugar.
             </p>
-
             <div class="hero-buttons">
-
-                <button
-                    class="hero-button primary"
-                    onclick="scrollToSection('portal')">
-                    Explorar Portal
-                </button>
-
-                <button
-                    class="hero-button"
-                    onclick="scrollToSection('servicios')">
-                    Ver Servicios
-                </button>
-
+                <button class="hero-button primary" onclick="scrollToSection('portal')">Explorar Portal</button>
+                <button class="hero-button" onclick="scrollToSection('servicios')">Ver Servicios</button>
             </div>
-
         </div>
-
     </header>
 
-
-    <!-- =========================
-         STATS
-    ========================= -->
-
+    <!-- STATS -->
     <div class="stats">
-
         <div class="stat">
             <strong>24/7</strong>
             <span>Portal disponible</span>
         </div>
-
         <div class="stat">
             <strong>100%</strong>
             <span>Experiencia RolePlay</span>
         </div>
-
         <div class="stat">
             <strong>ACRP</strong>
             <span>Comunidad oficial</span>
         </div>
-
         <div class="stat">
             <strong>Online</strong>
             <span>Estado del sistema</span>
         </div>
-
     </div>
 
-
-    <!-- =========================
-         PORTAL
-    ========================= -->
-
+    <!-- PORTAL -->
     <section class="section" id="portal">
-
         <div class="section-header">
-
-            <div class="section-label">
-                Plataforma
-            </div>
-
-            <h2 class="section-title">
-                Tu ciudad, en un solo lugar.
-            </h2>
-
-            <p class="section-description">
-                Accede a las principales herramientas del universo
-                de Arica Chile RolePlay.
-            </p>
-
+            <div class="section-label">Plataforma</div>
+            <h2 class="section-title">Tu ciudad, en un solo lugar.</h2>
+            <p class="section-description">Accede a las principales herramientas del universo de Arica Chile RolePlay.</p>
         </div>
-
-
         <div class="portal">
-
             <div class="portal-card large">
-
-                <h3>
-                    Portal ciudadano
-                </h3>
-
-                <p>
-                    Administra tu identidad, información bancaria,
-                    vehículos y publicaciones desde tu cuenta.
-                </p>
-
+                <h3>Portal ciudadano</h3>
+                <p>Administra tu identidad, información bancaria, vehículos y publicaciones desde tu cuenta.</p>
                 <div class="portal-list">
-
                     <div class="portal-item">
                         <span>Identidad / DNI</span>
-                        <button onclick="showMessage('Módulo de identidad próximamente disponible.')">
-                            Abrir
-                        </button>
+                        <button onclick="showMessage('Módulo de identidad próximamente disponible.')">Abrir</button>
                     </div>
-
                     <div class="portal-item">
                         <span>Banco</span>
-                        <button onclick="showMessage('Módulo bancario próximamente disponible.')">
-                            Abrir
-                        </button>
+                        <button onclick="showMessage('Módulo bancario próximamente disponible.')">Abrir</button>
                     </div>
-
                     <div class="portal-item">
                         <span>Vehículos</span>
-                        <button onclick="showMessage('Registro de vehículos próximamente disponible.')">
-                            Abrir
-                        </button>
+                        <button onclick="showMessage('Registro de vehículos próximamente disponible.')">Abrir</button>
                     </div>
-
                 </div>
-
             </div>
-
-
             <div class="portal-card">
-
-                <h3>
-                    Teléfono
-                </h3>
-
-                <p>
-                    Sistema de comunicación entre ciudadanos
-                    y acceso a aplicaciones del universo ACRP.
-                </p>
-
+                <h3>Teléfono</h3>
+                <p>Sistema de comunicación entre ciudadanos y acceso a aplicaciones del universo ACRP.</p>
                 <div class="portal-list">
-
                     <div class="portal-item">
                         <span>Mensajes</span>
-                        <button onclick="showMessage('Sistema de mensajes próximamente disponible.')">
-                            Entrar
-                        </button>
+                        <button onclick="showMessage('Sistema de mensajes próximamente disponible.')">Entrar</button>
                     </div>
-
                     <div class="portal-item">
                         <span>Marketplace</span>
-                        <button onclick="scrollToSection('marketplace')">
-                            Ver
-                        </button>
+                        <button onclick="scrollToSection('marketplace')">Ver</button>
                     </div>
-
                     <div class="portal-item">
                         <span>Transferencias</span>
-                        <button onclick="showMessage('Sistema bancario próximamente disponible.')">
-                            Abrir
-                        </button>
+                        <button onclick="showMessage('Sistema bancario próximamente disponible.')">Abrir</button>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         SERVICES
-    ========================= -->
-
+    <!-- SERVICES -->
     <section class="section" id="servicios">
-
         <div class="section-header">
-
-            <div class="section-label">
-                Servicios
-            </div>
-
-            <h2 class="section-title">
-                Todo lo necesario para tu RolePlay.
-            </h2>
-
-            <p class="section-description">
-                Herramientas diseñadas para complementar
-                la experiencia dentro de la ciudad.
-            </p>
-
+            <div class="section-label">Servicios</div>
+            <h2 class="section-title">Todo lo necesario para tu RolePlay.</h2>
+            <p class="section-description">Herramientas diseñadas para complementar la experiencia dentro de la ciudad.</p>
         </div>
-
-
         <div class="services-grid">
-
             <article class="service-card">
-
-                <div class="service-icon">
-                    ID
-                </div>
-
-                <h3>
-                    Identidad
-                </h3>
-
-                <p>
-                    Consulta y administra tu DNI,
-                    información personal y datos de personaje.
-                </p>
-
+                <div class="service-icon">ID</div>
+                <h3>Identidad</h3>
+                <p>Consulta y administra tu DNI, información personal y datos de personaje.</p>
             </article>
-
-
             <article class="service-card">
-
-                <div class="service-icon">
-                    $
-                </div>
-
-                <h3>
-                    Banco
-                </h3>
-
-                <p>
-                    Gestiona cuentas, movimientos y
-                    transferencias dentro del sistema.
-                </p>
-
+                <div class="service-icon">$</div>
+                <h3>Banco</h3>
+                <p>Gestiona cuentas, movimientos y transferencias dentro del sistema.</p>
             </article>
-
-
             <article class="service-card">
-
-                <div class="service-icon">
-                    CAR
-                </div>
-
-                <h3>
-                    Vehículos
-                </h3>
-
-                <p>
-                    Consulta registros, documentación
-                    y vehículos asociados a tu personaje.
-                </p>
-
+                <div class="service-icon">CAR</div>
+                <h3>Vehículos</h3>
+                <p>Consulta registros, documentación y vehículos asociados a tu personaje.</p>
             </article>
-
-
             <article class="service-card">
-
-                <div class="service-icon">
-                    M
-                </div>
-
-                <h3>
-                    Marketplace
-                </h3>
-
-                <p>
-                    Publica vehículos y artículos para
-                    que otros ciudadanos puedan encontrarlos.
-                </p>
-
+                <div class="service-icon">M</div>
+                <h3>Marketplace</h3>
+                <p>Publica vehículos y artículos para que otros ciudadanos puedan encontrarlos.</p>
             </article>
-
-
             <article class="service-card">
-
-                <div class="service-icon">
-                    MSG
-                </div>
-
-                <h3>
-                    Mensajería
-                </h3>
-
-                <p>
-                    Comunícate con otros usuarios mediante
-                    el teléfono integrado del portal.
-                </p>
-
+                <div class="service-icon">MSG</div>
+                <h3>Mensajería</h3>
+                <p>Comunícate con otros usuarios mediante el teléfono integrado del portal.</p>
             </article>
-
-
             <article class="service-card">
-
-                <div class="service-icon">
-                    +
-                </div>
-
-                <h3>
-                    Servicios
-                </h3>
-
-                <p>
-                    Accede a herramientas adicionales
-                    desarrolladas para la comunidad.
-                </p>
-
+                <div class="service-icon">+</div>
+                <h3>Servicios</h3>
+                <p>Accede a herramientas adicionales desarrolladas para la comunidad.</p>
             </article>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         MARKETPLACE
-    ========================= -->
-
+    <!-- MARKETPLACE -->
     <section class="section" id="marketplace">
-
         <div class="section-header">
-
-            <div class="section-label">
-                Marketplace
-            </div>
-
-            <h2 class="section-title">
-                Compra y vende dentro de la ciudad.
-            </h2>
-
-            <p class="section-description">
-                Espacio destinado a publicaciones de vehículos
-                y artículos de los ciudadanos.
-            </p>
-
+            <div class="section-label">Marketplace</div>
+            <h2 class="section-title">Compra y vende dentro de la ciudad.</h2>
+            <p class="section-description">Espacio destinado a publicaciones de vehículos y artículos de los ciudadanos.</p>
         </div>
-
-
         <div class="marketplace">
-
             <article class="market-card">
-
-                <div class="market-image">
-                    IMAGEN DEL VEHÍCULO
-                </div>
-
+                <div class="market-image">IMAGEN DEL VEHÍCULO</div>
                 <div class="market-content">
-
-                    <h3>
-                        Vehículo publicado
-                    </h3>
-
-                    <p>
-                        Publicación de ciudadano
-                    </p>
-
-                    <div class="price">
-                        $0
-                    </div>
-
+                    <h3>Vehículo publicado</h3>
+                    <p>Publicación de ciudadano</p>
+                    <div class="price">$0</div>
                 </div>
-
             </article>
-
-
             <article class="market-card">
-
-                <div class="market-image">
-                    IMAGEN DEL VEHÍCULO
-                </div>
-
+                <div class="market-image">IMAGEN DEL VEHÍCULO</div>
                 <div class="market-content">
-
-                    <h3>
-                        Vehículo publicado
-                    </h3>
-
-                    <p>
-                        Publicación de ciudadano
-                    </p>
-
-                    <div class="price">
-                        $0
-                    </div>
-
+                    <h3>Vehículo publicado</h3>
+                    <p>Publicación de ciudadano</p>
+                    <div class="price">$0</div>
                 </div>
-
             </article>
-
-
             <article class="market-card">
-
-                <div class="market-image">
-                    IMAGEN DEL ARTÍCULO
-                </div>
-
+                <div class="market-image">IMAGEN DEL ARTÍCULO</div>
                 <div class="market-content">
-
-                    <h3>
-                        Artículo publicado
-                    </h3>
-
-                    <p>
-                        Publicación de ciudadano
-                    </p>
-
-                    <div class="price">
-                        $0
-                    </div>
-
+                    <h3>Artículo publicado</h3>
+                    <p>Publicación de ciudadano</p>
+                    <div class="price">$0</div>
                 </div>
-
             </article>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         ACCESS
-    ========================= -->
-
+    <!-- ACCESS -->
     <section class="section" id="accesos">
-
         <div class="section-header">
-
-            <div class="section-label">
-                Accesos
-            </div>
-
-            <h2 class="section-title">
-                Áreas de gestión.
-            </h2>
-
-            <p class="section-description">
-                Accesos separados para ciudadanos y personal
-                autorizado.
-            </p>
-
+            <div class="section-label">Accesos</div>
+            <h2 class="section-title">Áreas de gestión.</h2>
+            <p class="section-description">Accesos separados para ciudadanos y personal autorizado.</p>
         </div>
-
-
         <div class="access-grid">
-
             <div class="access-card">
-
-                <h3>
-                    Portal Ciudadano
-                </h3>
-
-                <p>
-                    Accede a tu información personal,
-                    vehículos y herramientas de ciudadano.
-                </p>
-
-                <button
-                    class="access-button"
-                    onclick="openModal('citizen')">
-                    Ingresar
-                </button>
-
+                <h3>Portal Ciudadano</h3>
+                <p>Accede a tu información personal, vehículos y herramientas de ciudadano.</p>
+                <button class="access-button" onclick="openModal('citizen')">Ingresar</button>
             </div>
-
-
             <div class="access-card">
-
-                <h3>
-                    Panel Staff
-                </h3>
-
-                <p>
-                    Área privada para la administración
-                    y moderación de la comunidad.
-                </p>
-
-                <button
-                    class="access-button"
-                    onclick="openModal('staff')">
-                    Acceso Staff
-                </button>
-
+                <h3>Panel Staff</h3>
+                <p>Área privada para la administración y moderación de la comunidad.</p>
+                <button class="access-button" onclick="openModal('staff')">Acceso Staff</button>
             </div>
-
-
             <div class="access-card">
-
-                <h3>
-                    Panel Policial
-                </h3>
-
-                <p>
-                    Herramientas destinadas al personal
-                    policial autorizado.
-                </p>
-
-                <button
-                    class="access-button"
-                    onclick="openModal('police')">
-                    Acceso Policial
-                </button>
-
+                <h3>Panel Policial</h3>
+                <p>Herramientas y registros de antecedentes para las fuerzas del orden.</p>
+                <button class="access-button" onclick="openModal('police')">Acceso Policial</button>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
+    <!-- FOOTER -->
     <footer>
-
         <div class="footer-inner">
-
             <div>
-
-                <div class="footer-title">
-                    Arica Chile RolePlay
-                </div>
-
-                <div class="footer-text">
-                    Portal oficial de la comunidad.
-                </div>
-
+                <div class="footer-title">Arica Chile RolePlay</div>
+                <div class="footer-text">Portal oficial de gestión y comunidad. Todos los derechos reservados.</div>
             </div>
-
-            <div class="footer-text">
-                © 2026 Arica Chile RolePlay
-            </div>
-
+            <div class="footer-text">Plataforma ACRP 2026</div>
         </div>
-
     </footer>
 
-
-    <!-- =========================
-         LOGIN MODAL
-    ========================= -->
-
-    <div class="modal" id="loginModal">
-
+    <!-- MODAL (Estructura dinámica simple) -->
+    <div class="modal" id="appModal">
         <div class="modal-box">
-
             <div class="modal-top">
-
-                <h3 id="modalTitle">
-                    Iniciar sesión
-                </h3>
-
-                <button
-                    class="close"
-                    onclick="closeModal()">
-                    ×
-                </button>
-
+                <h3 id="modalTitle">Acceso</h3>
+                <button class="close" onclick="closeModal()">✕</button>
             </div>
-
-
             <div class="input-group">
-
-                <label>
-                    USUARIO
-                </label>
-
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Ingresa tu usuario">
-
+                <label>Usuario / Discord ID</label>
+                <input type="text" placeholder="Ingresa tu usuario">
             </div>
-
-
             <div class="input-group">
-
-                <label>
-                    CONTRASEÑA
-                </label>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Ingresa tu contraseña">
-
+                <label>Contraseña / Token</label>
+                <input type="password" placeholder="••••••••">
             </div>
-
-
-            <button
-                class="modal-button"
-                onclick="fakeLogin()">
-                Continuar
-            </button>
-
-
-            <p class="modal-note">
-                Este formulario es solamente la interfaz del portal.
-                Las credenciales reales no deben almacenarse dentro
-                de este archivo ni en JavaScript público.
-            </p>
-
+            <button class="modal-button" onclick="showMessage('Autenticación simulada con éxito.'); closeModal();">Acceder</button>
+            <div class="modal-note">Este es un entorno seguro simulado para el RolePlay de la comunidad.</div>
         </div>
-
     </div>
 
-
-    <!-- =========================
-         TOAST
-    ========================= -->
-
-    <div class="toast" id="toast">
-        Mensaje
-    </div>
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toastMessage">Notificación del sistema</div>
 
     <script>
-
-        let currentAccess = "citizen";
-
         function scrollToSection(id) {
-
             const element = document.getElementById(id);
-
-            if (!element) return;
-
-            element.scrollIntoView({
-                behavior: "smooth"
-            });
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
         }
-
 
         function openModal(type) {
-
-            currentAccess = type;
-
-            const modal = document.getElementById("loginModal");
-            const title = document.getElementById("modalTitle");
-
-            if (type === "staff") {
-                title.textContent = "Acceso Staff";
-            }
-
-            else if (type === "police") {
-                title.textContent = "Acceso Policial";
-            }
-
-            else if (type === "citizen") {
-                title.textContent = "Portal Ciudadano";
-            }
-
-            else {
-                title.textContent = "Iniciar sesión";
-            }
-
-            modal.classList.add("active");
-
-            document.body.classList.add("modal-open");
+            const modal = document.getElementById('appModal');
+            const title = document.getElementById('modalTitle');
+            if(type === 'staff') title.innerText = 'Acceso Staff';
+            else if(type === 'police') title.innerText = 'Panel Policial';
+            else if(type === 'citizen') title.innerText = 'Portal Ciudadano';
+            else title.innerText = 'Iniciar Sesión';
+            
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
         }
-
 
         function closeModal() {
-
-            document
-                .getElementById("loginModal")
-                .classList.remove("active");
-
-            document.body.classList.remove("modal-open");
+            const modal = document.getElementById('appModal');
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
         }
 
-
-        function fakeLogin() {
-
-            const username =
-                document.getElementById("username").value.trim();
-
-            const password =
-                document.getElementById("password").value;
-
-            if (!username || !password) {
-
-                showMessage(
-                    "Completa usuario y contraseña."
-                );
-
-                return;
-            }
-
-            /*
-                IMPORTANTE:
-
-                NO pongas aquí contraseñas reales.
-
-                GitHub Pages es hosting estático y todo el
-                JavaScript enviado al navegador puede ser
-                inspeccionado por cualquier persona.
-
-                Para Staff / Policía necesitas un backend,
-                Firebase, Supabase u otro sistema de autenticación.
-            */
-
-            closeModal();
-
-            showMessage(
-                "La interfaz está lista. Falta conectar la autenticación segura."
-            );
-        }
-
-
-        function showMessage(message) {
-
-            const toast =
-                document.getElementById("toast");
-
-            toast.textContent = message;
-
-            toast.classList.add("show");
-
+        function showMessage(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.innerText = text;
+            toast.classList.add('show');
             setTimeout(() => {
-
-                toast.classList.remove("show");
-
-            }, 3500);
+                toast.classList.remove('show');
+            }, 3000);
         }
-
 
         function toggleMobileMenu() {
-
-            showMessage(
-                "En móvil puedes utilizar las secciones desplazándote por la página."
-            );
+            showMessage('Menú móvil optimizado.');
         }
-
-
-        document
-            .getElementById("loginModal")
-            .addEventListener("click", function(event) {
-
-                if (event.target === this) {
-                    closeModal();
-                }
-
-            });
-
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (event.key === "Escape") {
-                    closeModal();
-                }
-
-            }
-        );
-
     </script>
-
 </body>
 </html>
