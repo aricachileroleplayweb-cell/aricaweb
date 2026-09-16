@@ -171,7 +171,6 @@
                     <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Banco</button>
                     <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Concesionario</button>
                     <button onclick="switchTab('store')" id="btn-store" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Tienda</button>
-                    <button onclick="switchTab('cellphone')" id="btn-cellphone" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Celular</button>
                     <button onclick="switchTab('police')" id="btn-police" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Policial</button>
                     <button onclick="switchTab('staff')" id="btn-staff" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Staff</button>
                     <button onclick="logoutSession()" class="glass-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 border-rose-500/30">Salir</button>
@@ -250,9 +249,6 @@
                                 <div class="text-gray-400 text-center py-2 text-[11px]">No hay transacciones recientes.</div>
                             </div>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/10 flex gap-2">
-                            <button onclick="simulateWithdraw()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Girar Dinero</button>
-                        </div>
                     </div>
 
                     <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center">
@@ -309,49 +305,11 @@
                 </div>
             </div>
 
-            <div id="tab-cellphone" class="tab-content hidden space-y-6">
-                <div class="flex justify-center">
-                    <div class="w-full max-w-sm glass-card rounded-[36px] p-4 shadow-2xl border-2 border-slate-700 relative overflow-hidden bg-slate-950/90">
-                        <div class="w-24 h-4 bg-black rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <div class="w-2.5 h-2.5 bg-slate-900 rounded-full mr-2"></div>
-                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                        </div>
-                        <div id="phone-screen" class="min-h-[460px] flex flex-col justify-between text-white">
-                            <div id="phone-home-view">
-                                <div class="text-center mb-4">
-                                    <p class="text-[10px] text-gray-400 font-mono">10:02 AM</p>
-                                    <h3 class="text-xs font-bold mt-0.5 text-white">AricaPhone OS</h3>
-                                </div>
-                                <div class="grid grid-cols-2 gap-2.5 px-1 py-3">
-                                    <button onclick="openPhoneApp('aricagram')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold">AricaGram</button>
-                                    <button onclick="openPhoneApp('chat')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold">Mensajes</button>
-                                    <button onclick="openPhoneApp('bank')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold">BancaApp</button>
-                                    <button onclick="openPhoneApp('emergency')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold text-rose-300">Emergencia</button>
-                                </div>
-                            </div>
-                            <div id="phone-app-view" class="hidden flex-grow flex flex-col">
-                                <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
-                                    <button onclick="closePhoneApp()" class="text-[11px] text-blue-400 font-semibold">Volver</button>
-                                    <span id="phone-app-title" class="text-[11px] font-bold text-white">App</span>
-                                    <span></span>
-                                </div>
-                                <div id="phone-app-content" class="flex-grow overflow-y-auto text-[11px] space-y-2 pr-1"></div>
-                            </div>
-                            <div class="pt-3 border-t border-white/10 flex justify-between items-center text-[9px] text-gray-400 px-3">
-                                <span>Arica 5G</span>
-                                <div class="w-20 h-1 bg-white/40 rounded-full cursor-pointer" onclick="openPhoneApp('home')"></div>
-                                <span>100%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div id="tab-police" class="tab-content hidden space-y-6">
                 <div class="glass-card p-6 rounded-2xl">
                     <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
                         <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
-                        <p class="text-xs text-gray-300">Ingrese cualquier clave para acceder al sistema policial.</p>
+                        <p class="text-xs text-gray-300">Ingrese su clave para acceder al sistema policial.</p>
                         <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Clave Policial">
                         <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Iniciar Sesión Policial</button>
                     </div>
@@ -790,19 +748,6 @@
             });
         }
 
-        function simulateWithdraw() {
-            const char = getActiveCharacter();
-            if(!char) { alert("Seleccione un personaje activo primero."); return; }
-            if(char.balance >= 20000) {
-                char.balance -= 20000;
-                char.transactions.unshift({ text: "Retiro de Efectivo ATM", amount: "- $20.000", type: "expense" });
-                saveDatabase();
-                updateBankUI();
-            } else {
-                alert("Fondos insuficientes en la cuenta del personaje activo.");
-            }
-        }
-
         function renderDealership() {
             const grid = document.getElementById('dealership-grid');
             grid.innerHTML = '';
@@ -883,61 +828,12 @@
             });
         }
 
-        function openPhoneApp(appName) {
-            const homeView = document.getElementById('phone-home-view');
-            const appView = document.getElementById('phone-app-view');
-            const appTitle = document.getElementById('phone-app-title');
-            const appContent = document.getElementById('phone-app-content');
-
-            if(appName === 'home') {
-                homeView.classList.remove('hidden');
-                appView.classList.add('hidden');
+        function loginPolice() {
+            const pass = document.getElementById('police-pass').value.trim();
+            if (pass !== "AricaLegal2026") {
+                alert("Contraseña policial incorrecta.");
                 return;
             }
-
-            homeView.classList.add('hidden');
-            appView.classList.remove('hidden');
-
-            const char = getActiveCharacter();
-            const charName = char ? `${char.name} ${char.lastname}` : 'Ciudadano';
-
-            if(appName === 'aricagram') {
-                appTitle.innerText = "AricaGram";
-                appContent.innerHTML = `
-                    <div class="bg-slate-950/80 p-2.5 rounded-xl border border-white/10">
-                        <p class="font-bold text-[10px] text-amber-400">@${charName.toLowerCase().replace(' ', '_')}</p>
-                        <p class="text-[10px] text-gray-200 mt-1">Conectado y activo en la ciudad de Arica.</p>
-                    </div>
-                `;
-            } else if(appName === 'chat') {
-                appTitle.innerText = "Mensajes";
-                appContent.innerHTML = `
-                    <div class="p-2.5 rounded-lg bg-blue-950/60 border border-blue-800/40 text-[10px]"><b>Sistema:</b> Hola ${charName}, recuerda tus obligaciones legales.</div>
-                `;
-            } else if(appName === 'bank') {
-                appTitle.innerText = "BancaApp";
-                appContent.innerHTML = `
-                    <div class="p-3 rounded-xl bg-gradient-to-r from-slate-900 to-black text-center border border-white/15">
-                        <p class="text-[9px] text-gray-400">Saldo de ${charName}</p>
-                        <p class="text-sm font-black text-white mt-0.5">$${char ? char.balance.toLocaleString('es-CL') : 0} CLP</p>
-                    </div>
-                `;
-            } else if(appName === 'emergency') {
-                appTitle.innerText = "Emergencias";
-                appContent.innerHTML = `
-                    <div class="space-y-2">
-                        <button onclick="alert('Alerta enviada por ${charName}.')" class="w-full py-2 bg-blue-700/80 hover:bg-blue-700 rounded-lg text-white font-bold text-[10px] border border-blue-400/40">Llamar a Carabineros</button>
-                        <button onclick="alert('Alerta enviada por ${charName}.')" class="w-full py-2 bg-rose-700/80 hover:bg-rose-700 rounded-lg text-white font-bold text-[10px] border border-rose-400/40">Llamar a Ambulancia</button>
-                    </div>
-                `;
-            }
-        }
-
-        function closePhoneApp() {
-            openPhoneApp('home');
-        }
-
-        function loginPolice() {
             document.getElementById('police-login-box').classList.add('hidden');
             document.getElementById('police-dashboard').classList.remove('hidden');
         }
@@ -1057,6 +953,11 @@
         }
 
         function loginStaff() {
+            const pass = document.getElementById('staff-pass').value.trim();
+            if (pass !== "AricaDireccion2026") {
+                alert("Contraseña Staff incorrecta.");
+                return;
+            }
             document.getElementById('staff-login-box').classList.add('hidden');
             document.getElementById('staff-dashboard').classList.remove('hidden');
             updateStaffDeleteDropdown();
