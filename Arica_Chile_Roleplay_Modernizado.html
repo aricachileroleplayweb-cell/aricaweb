@@ -3,1241 +3,1703 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arica Chile Roleplay - Portal Oficial</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Arica Chile RolePlay | Portal Oficial</title>
+
+    <meta name="description"
+          content="Portal oficial de Arica Chile RolePlay. Identidad, servicios, marketplace, vehículos y comunidad.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
     <style>
-        body {
+
+        * {
             margin: 0;
-            overflow-x: hidden;
-            background-color: #000;
+            padding: 0;
+            box-sizing: border-box;
         }
-        /* Video de fondo a pantalla completa con desenfoque (blur) */
-        .bg-video {
+
+        :root {
+            --bg: #07090d;
+            --bg-soft: #0c1017;
+            --card: rgba(18, 22, 30, 0.78);
+            --border: rgba(255,255,255,0.09);
+            --text: #ffffff;
+            --muted: #8e98a8;
+            --accent: #ffffff;
+            --accent-dark: #d8dce2;
+            --danger: #ff4d5f;
+            --success: #40d98a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(255,255,255,0.10),
+                    transparent 38%
+                ),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -2;
-            filter: blur(6px);
-            transform: scale(1.05);
+            width: 100%;
+            height: 74px;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(7,9,13,0.72);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border-bottom: 1px solid var(--border);
         }
-        /* Capa oscura semitransparente sobre el video para legibilidad */
-        .video-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(5, 5, 12, 0.75);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: -1;
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
-        .glass-bg {
-            background: rgba(10, 10, 15, 0.65);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fff;
+            color: #000;
+            font-weight: 900;
+            font-size: 14px;
+
+            overflow: hidden;
         }
-        .glass-card {
-            background: rgba(18, 18, 26, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-        .glass-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+
+        .brand-text span {
+            display: block;
+        }
+
+        .brand-subtitle {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #aeb6c3;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
             color: white;
-            transition: all 0.3s ease;
         }
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.4);
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-button {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .nav-button:hover {
+            background: rgba(255,255,255,0.10);
+        }
+
+        .nav-button.primary {
+            background: white;
+            color: black;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 760px;
+            padding: 150px 7% 100px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.045);
+            filter: blur(100px);
+
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-content {
+            max-width: 1050px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 13px;
+
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.035);
+
+            color: #bfc7d3;
+            font-size: 11px;
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 12px rgba(64,217,138,.8);
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 86px);
+            line-height: .95;
+            letter-spacing: -5px;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #9ca6b5;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            padding: 14px 22px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+
+            background: rgba(255,255,255,.04);
+            color: white;
+
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: .25s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,.09);
+        }
+
+        .hero-button.primary {
+            background: white;
+            color: black;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            width: min(1000px, 90%);
+            margin: -50px auto 100px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background: rgba(255,255,255,.025);
+            backdrop-filter: blur(15px);
+
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 28px 20px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            width: min(1180px, 88%);
+            margin: 0 auto 120px;
+        }
+
+        .section-header {
+            margin-bottom: 35px;
+        }
+
+        .section-label {
+            color: #8d97a7;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 45px);
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            max-width: 600px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .service-card {
+            padding: 28px;
+            min-height: 190px;
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.015)
+                );
+
+            transition: .25s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,.18);
+        }
+
+        .service-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,.07);
+            border: 1px solid var(--border);
+
+            margin-bottom: 22px;
+            font-size: 18px;
+        }
+
+        .service-card h3 {
+            font-size: 16px;
+            margin-bottom: 9px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           PORTAL
+        ========================= */
+
+        .portal {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 16px;
+        }
+
+        .portal-card {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.06),
+                    rgba(255,255,255,.015)
+                );
+        }
+
+        .portal-card.large {
+            min-height: 310px;
+        }
+
+        .portal-card h3 {
+            font-size: 24px;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .portal-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .portal-list {
+            margin-top: 25px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .portal-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: rgba(255,255,255,.025);
+        }
+
+        .portal-item span {
+            font-size: 12px;
+            color: #cbd1da;
+        }
+
+        .portal-item button {
+            border: 0;
+            background: white;
+            color: black;
+
+            padding: 7px 11px;
+            border-radius: 8px;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           MARKETPLACE
+        ========================= */
+
+        .marketplace {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .market-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            background: rgba(255,255,255,.025);
+        }
+
+        .market-image {
+            height: 170px;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #303741,
+                    #11151b
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #707986;
+            font-size: 12px;
+        }
+
+        .market-content {
+            padding: 20px;
+        }
+
+        .market-content h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .market-content p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .price {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           ACCESS
+        ========================= */
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .access-card {
+            padding: 25px;
+
+            border-radius: 18px;
+            border: 1px solid var(--border);
+
+            background: rgba(255,255,255,.025);
+        }
+
+        .access-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .access-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .access-button {
+            width: 100%;
+            padding: 11px;
+
+            border-radius: 10px;
+            border: 1px solid var(--border);
+
+            background: white;
+            color: black;
+
+            font-weight: 800;
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 45px 7%;
+            background: rgba(0,0,0,.2);
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-text {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer-title {
+            color: white;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0,0,0,.78);
+            backdrop-filter: blur(15px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(430px, 100%);
+
+            background: #0d1118;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow: 0 30px 100px rgba(0,0,0,.5);
+        }
+
+        .modal-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-top h3 {
+            font-size: 20px;
+        }
+
+        .close {
+            width: 32px;
+            height: 32px;
+
+            border-radius: 9px;
+            border: 1px solid var(--border);
+
+            background: rgba(255,255,255,.04);
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #aab3c0;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: #080b10;
+            color: white;
+
+            padding: 12px;
+
             outline: none;
         }
-        .glass-input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-        .glass-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(6px);
-            transition: all 0.3s ease;
-        }
-        .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 3px;
+
+        .input-group input:focus {
+            border-color: rgba(255,255,255,.3);
         }
 
+        .modal-button {
+            width: 100%;
 
-        /* ARICA RP — REDISEÑO PREMIUM */
-        html { scroll-behavior: smooth; }
-        .hero-bg {
+            margin-top: 10px;
+            padding: 13px;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: white;
+            color: black;
+
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .modal-note {
+            color: #687281;
+            font-size: 10px;
+            line-height: 1.5;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
             position: fixed;
-            inset: 0;
-            z-index: -3;
-            background-image: url("hero-arica.png");
-            background-size: cover;
-            background-position: center;
-            filter: brightness(.62) saturate(.78);
-            transform: scale(1.015);
+            right: 25px;
+            bottom: 25px;
+
+            padding: 13px 17px;
+
+            background: #11161e;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            color: white;
+            font-size: 11px;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            pointer-events: none;
+            transition: .3s;
+
+            z-index: 5000;
         }
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background:
-                radial-gradient(circle at 70% 35%, rgba(30,70,95,.12), transparent 35%),
-                linear-gradient(90deg, rgba(2,5,8,.96) 0%, rgba(2,5,8,.72) 42%, rgba(2,5,8,.28) 100%),
-                linear-gradient(0deg, rgba(3,6,9,.98) 0%, rgba(3,6,9,.08) 45%, rgba(3,6,9,.62) 100%);
-            backdrop-filter: blur(1px);
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .hero-primary, .hero-secondary {
-            display:flex; align-items:center; gap:.7rem; justify-content:center;
-            min-width:150px; padding:.85rem 1.15rem; border-radius:12px;
-            font-size:.72rem; font-weight:800; letter-spacing:.04em;
-            transition:all .25s ease;
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 850px) {
+
+            .nav-links,
+            .nav-actions {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat:nth-child(2) {
+                border-right: none;
+            }
+
+            .services-grid,
+            .marketplace,
+            .access-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portal {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 700px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
-        .hero-primary { background:#fff; color:#080b0f; box-shadow:0 12px 35px rgba(0,0,0,.28); }
-        .hero-primary:hover { transform:translateY(-2px); box-shadow:0 18px 45px rgba(0,0,0,.4); }
-        .hero-secondary { background:rgba(10,18,25,.55); color:#fff; border:1px solid rgba(255,255,255,.18); backdrop-filter:blur(16px); }
-        .hero-secondary:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.32); transform:translateY(-2px); }
-        .server-card { background:rgba(7,13,20,.72)!important; border-color:rgba(255,255,255,.12)!important; }
-        .status-pill { display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border-radius:999px;background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.2);color:#86efac;font-size:9px;font-weight:800; }
-        .status-pill span { width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e; }
-        .quick-card {
-            min-height:116px; padding:1rem; text-align:left; border-radius:18px;
-            background:rgba(7,13,20,.78); border:1px solid rgba(255,255,255,.09);
-            backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-            display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
-            transition:all .25s ease; box-shadow:0 16px 40px rgba(0,0,0,.2);
-        }
-        .quick-card:hover { transform:translateY(-5px); border-color:rgba(255,255,255,.22); background:rgba(15,24,34,.9); }
-        .quick-icon { font-size:8px; letter-spacing:.12em; color:#b9e9ff; border:1px solid rgba(125,211,252,.2); background:rgba(56,189,248,.07); padding:.35rem .45rem; border-radius:7px; margin-bottom:auto; }
-        .quick-card b { font-size:.72rem; margin-top:1rem; color:#fff; }
-        .quick-card small { color:rgba(255,255,255,.42); font-size:.58rem; margin-top:.25rem; }
-        .tab-content { animation:tabIn .35s ease both; }
-        @keyframes tabIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-        @media (max-width: 768px) {
-            #home-hero { min-height:78vh; }
-            #home-hero h2 { font-size:3.5rem; }
-            .server-card { margin-top:1rem; }
-            .quick-card { min-height:105px; }
+
+        @media(max-width: 500px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .section {
+                width: calc(100% - 40px);
+            }
+
+            .stats {
+                width: calc(100% - 40px);
+            }
+
+            .stat {
+                padding: 22px 10px;
+            }
+
+            .hero h1 {
+                font-size: 47px;
+            }
+
+            .portal-card {
+                padding: 23px;
+            }
         }
 
     </style>
 </head>
-<body class="min-h-screen text-white font-sans flex flex-col justify-between bg-[#05070a]">
 
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="video-overlay" aria-hidden="true"></div>
+<body>
 
-    <div id="auth-screen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-        <div class="glass-card p-8 rounded-2xl w-full max-w-md space-y-6">
-            <div class="text-center">
-                <img src="arica logo.png" alt="Arica RP Logo" class="w-16 h-16 rounded-full object-cover border-2 border-white/30 mx-auto mb-3 shadow-lg">
-                <h1 class="text-lg font-black tracking-widest text-white uppercase">ARICA CHILE RP</h1>
-                <p class="text-xs text-gray-300 mt-1">Portal Ciudadano Oficial</p>
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="#inicio" class="brand">
+
+            <div class="brand-logo">
+                ACRP
             </div>
 
-            <div class="flex border-b border-white/10 pb-2">
-                <button onclick="switchAuthMode('login')" id="tab-login-btn" class="flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white">Iniciar Sesión</button>
-                <button onclick="switchAuthMode('register')" id="tab-reg-btn" class="flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent">Registrarse</button>
-                <button onclick="switchAuthMode('recovery')" id="tab-rec-btn" class="flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent">Recuperar</button>
+            <div class="brand-text">
+                <span>Arica Chile RolePlay</span>
+                <span class="brand-subtitle">Portal Oficial</span>
             </div>
 
-            <div id="form-login" class="space-y-4">
-                <div>
-                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Nombre de Discord</label>
-                    <input type="text" id="login-discord" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. Ignacio#1234">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Contraseña</label>
-                    <input type="password" id="login-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="••••••••">
-                </div>
-                <div class="flex justify-between items-center text-[11px]">
-                    <button onclick="switchAuthMode('recovery')" class="text-blue-400 hover:underline">¿Olvidaste tu contraseña?</button>
-                </div>
-                <button onclick="handleLogin()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider">Entrar al Portal</button>
-            </div>
+        </a>
 
-            <div id="form-register" class="space-y-4 hidden">
-                <div>
-                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Nombre de Discord</label>
-                    <input type="text" id="reg-discord" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. Ignacio#1234">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Crea tu Contraseña</label>
-                    <input type="password" id="reg-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="••••••••">
-                </div>
-                <button onclick="handleRegister()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider">Crear Cuenta</button>
-            </div>
+        <div class="nav-links">
 
-            <div id="form-recovery" class="space-y-4 hidden">
-                <p class="text-[11px] text-gray-300 text-center">Introduce tu Discord para asignar una nueva contraseña. Tienes un límite de 3 restablecimientos permitidos.</p>
-                <div>
-                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Nombre de Discord</label>
-                    <input type="text" id="rec-discord" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. Ignacio#1234">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-medium text-gray-300 mb-1">Nueva Contraseña</label>
-                    <input type="password" id="rec-new-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Nueva contraseña">
-                </div>
-                <button onclick="handleRecovery()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs tracking-wider text-amber-200">Restablecer Contraseña</button>
-            </div>
+            <a href="#inicio">Inicio</a>
+            <a href="#portal">Portal</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#marketplace">Marketplace</a>
+            <a href="#accesos">Accesos</a>
+
         </div>
+
+        <div class="nav-actions">
+
+            <button
+                class="nav-button"
+                onclick="openModal('login')">
+                Ingresar
+            </button>
+
+            <button
+                class="nav-button primary"
+                onclick="scrollToSection('portal')">
+                Entrar al Portal
+            </button>
+
+        </div>
+
+        <button class="mobile-menu" onclick="toggleMobileMenu()">
+            ☰
+        </button>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <header class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Sistema operativo
+            </div>
+
+            <h1>
+                Arica Chile<br>
+                <span>RolePlay.</span>
+            </h1>
+
+            <p>
+                Bienvenido al portal oficial de Arica Chile RolePlay.
+                Gestiona tu identidad, vehículos, servicios, marketplace
+                y herramientas de la comunidad desde un solo lugar.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="hero-button primary"
+                    onclick="scrollToSection('portal')">
+                    Explorar Portal
+                </button>
+
+                <button
+                    class="hero-button"
+                    onclick="scrollToSection('servicios')">
+                    Ver Servicios
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>24/7</strong>
+            <span>Portal disponible</span>
+        </div>
+
+        <div class="stat">
+            <strong>100%</strong>
+            <span>Experiencia RolePlay</span>
+        </div>
+
+        <div class="stat">
+            <strong>ACRP</strong>
+            <span>Comunidad oficial</span>
+        </div>
+
+        <div class="stat">
+            <strong>Online</strong>
+            <span>Estado del sistema</span>
+        </div>
+
     </div>
 
-    <div id="main-app" class="hidden flex flex-col min-h-screen justify-between">
-        <header class="glass-bg sticky top-0 z-40 px-4 py-3">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center space-x-3">
-                    <img src="arica logo.png" alt="Arica RP Logo" class="w-11 h-11 rounded-full object-cover border border-white/20 shadow-md">
-                    <div>
-                        <h1 class="text-sm font-extrabold tracking-widest text-white uppercase">ARICA CHILE RP</h1>
-                        <p class="text-[10px] text-gray-300">Usuario: <span id="current-user-tag" class="text-amber-400 font-bold"></span></p>
-                    </div>
-                </div>
 
-                <div class="flex items-center space-x-2 bg-white/5 border border-white/15 px-3 py-1.5 rounded-xl">
-                    <span class="text-[10px] text-gray-300 uppercase font-bold">PJ Activo:</span>
-                    <select id="global-active-pj" onchange="changeActiveCharacter(this.value)" class="glass-input px-2 py-1 rounded-lg text-xs bg-slate-900 font-semibold text-white">
-                        <option value="">Sin Personaje</option>
-                    </select>
-                </div>
+    <!-- =========================
+         PORTAL
+    ========================= -->
 
-                <nav class="flex flex-wrap justify-center gap-1.5">
-                    <button onclick="scrollToHome()" id="btn-home" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Inicio</button>
-                    <button onclick="switchTab('identity')" id="btn-identity" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Identidad</button>
-                    <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Banco</button>
-                    <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Concesionario</button>
-                    <button onclick="switchTab('store')" id="btn-store" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Tienda</button>
-                    <button onclick="switchTab('police')" id="btn-police" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Policial</button>
-                    <button onclick="switchTab('staff')" id="btn-staff" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Staff</button>
-                    <button onclick="logoutSession()" class="glass-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 border-rose-500/30">Salir</button>
-                </nav>
+    <section class="section" id="portal">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Plataforma
             </div>
-        </header>
 
-        <section id="home-hero" class="relative min-h-[72vh] flex items-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/20"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-black/20"></div>
+            <h2 class="section-title">
+                Tu ciudad, en un solo lugar.
+            </h2>
 
-            <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-10 py-20">
-                <div class="grid lg:grid-cols-[1fr_360px] gap-10 items-end">
-                    <div class="max-w-3xl">
-                        <p class="text-[11px] tracking-[0.35em] uppercase text-cyan-300/90 font-semibold mb-4">Portal Ciudadano Oficial</p>
-                        <h2 class="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tight leading-[0.88] text-white">
-                            ARICA CHILE
-                            <span class="block font-light text-white/75 tracking-[-0.03em]">ROLEPLAY</span>
-                        </h2>
-                        <p class="mt-7 max-w-xl text-sm sm:text-base leading-7 text-white/65">
-                            Vive la experiencia roleplay más completa de Arica. Gestiona tu identidad, economía, vehículos y acceso a los sistemas del servidor desde un solo lugar.
-                        </p>
-                        <div class="flex flex-wrap gap-3 mt-8">
-                            <button onclick="switchTab('identity')" class="hero-primary">Explorar Portal <span>→</span></button>
-                            <button onclick="switchTab('dealership')" class="hero-secondary">Concesionario</button>
-                        </div>
-                    </div>
+            <p class="section-description">
+                Accede a las principales herramientas del universo
+                de Arica Chile RolePlay.
+            </p>
 
-                    <div class="server-card glass-card rounded-3xl p-5">
-                        <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                            <div>
-                                <p class="text-[9px] tracking-[0.22em] uppercase text-white/40">Estado del servidor</p>
-                                <h3 class="text-lg font-bold mt-1">Arica Chile RP</h3>
-                            </div>
-                            <span class="status-pill"><span></span> Online</span>
-                        </div>
-                        <div class="space-y-4 pt-5">
-                            <div class="flex justify-between"><span class="text-xs text-white/45">Jugadores en línea</span><b class="text-sm">Online</b></div>
-                            <div class="flex justify-between"><span class="text-xs text-white/45">Portal</span><b class="text-sm">Operativo</b></div>
-                            <div class="flex justify-between"><span class="text-xs text-white/45">Sistema</span><b class="text-sm">v2.0</b></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <section class="max-w-7xl mx-auto w-full px-6 lg:px-10 -mt-10 relative z-20">
-            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-                <button onclick="switchTab('identity')" class="quick-card"><span class="quick-icon">ID</span><b>Identidad</b><small>Personajes y DNI</small></button>
-                <button onclick="switchTab('economy')" class="quick-card"><span class="quick-icon">$</span><b>Banco</b><small>Saldo y movimientos</small></button>
-                <button onclick="switchTab('dealership')" class="quick-card"><span class="quick-icon">CAR</span><b>Concesionario</b><small>Vehículos</small></button>
-                <button onclick="switchTab('store')" class="quick-card"><span class="quick-icon">SHOP</span><b>Tienda</b><small>Productos y licencias</small></button>
-                <button onclick="switchTab('police')" class="quick-card"><span class="quick-icon">SIP</span><b>Policial</b><small>Sistema policial</small></button>
-                <button onclick="switchTab('staff')" class="quick-card"><span class="quick-icon">STAFF</span><b>Staff</b><small>Administración</small></button>
-            </div>
-        </section>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 flex-grow w-full z-10">
+        <div class="portal">
 
-            <div id="tab-identity" class="tab-content space-y-6">
-                <div class="glass-card p-6 md:p-8 rounded-2xl">
-                    <div class="text-center mb-6">
-                        <h2 class="text-xl font-bold text-white tracking-wide">Registro de Identidad Ciudadana</h2>
-                        <p class="text-xs text-gray-300 mt-1">Crea y administra hasta 2 documentos de identidad oficiales para tu cuenta de Discord.</p>
-                    </div>
+            <div class="portal-card large">
 
-                    <div id="dni-form-container" class="space-y-4 max-w-xl mx-auto">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-[11px] font-medium text-gray-300 mb-1">Nombre</label>
-                                <input type="text" id="char-name" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. Ignacio">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-medium text-gray-300 mb-1">Apellido</label>
-                                <input type="text" id="char-lastname" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. Rojas">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-[11px] font-medium text-gray-300 mb-1">Edad</label>
-                                <input type="number" id="char-age" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" placeholder="Ej. 25">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-medium text-gray-300 mb-1">Género</label>
-                                <select id="char-gender" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs bg-slate-900/90">
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Femenino">Femenino</option>
-                                    <option value="Otro">Otro</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-medium text-gray-300 mb-1">Nacionalidad</label>
-                            <input type="text" id="char-nacionality" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs" value="Chilena">
-                        </div>
-                        <button onclick="registerCharacter()" id="btn-create-dni" class="w-full glass-btn py-3 rounded-xl font-bold text-xs text-white tracking-wider mt-2">
-                            Emitir Documento de Identidad ($800.000 Iniciales)
+                <h3>
+                    Portal ciudadano
+                </h3>
+
+                <p>
+                    Administra tu identidad, información bancaria,
+                    vehículos y publicaciones desde tu cuenta.
+                </p>
+
+                <div class="portal-list">
+
+                    <div class="portal-item">
+                        <span>Identidad / DNI</span>
+                        <button onclick="showMessage('Módulo de identidad próximamente disponible.')">
+                            Abrir
                         </button>
                     </div>
 
-                    <div id="dni-display-container" class="mt-8 space-y-6">
-                        <h3 class="text-xs font-semibold uppercase tracking-wider text-center text-gray-300 border-b border-white/10 pb-2">Tus Ciudadanos Registrados</h3>
-                        <div id="dni-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-                        <div class="text-center pt-2" id="new-pj-btn-box">
-                            <button onclick="showNewDniForm()" class="glass-btn px-6 py-2.5 rounded-xl text-xs font-semibold text-white">
-                                Crear 2do Personaje (Nuevo DNI)
-                            </button>
-                        </div>
+                    <div class="portal-item">
+                        <span>Banco</span>
+                        <button onclick="showMessage('Módulo bancario próximamente disponible.')">
+                            Abrir
+                        </button>
                     </div>
+
+                    <div class="portal-item">
+                        <span>Vehículos</span>
+                        <button onclick="showMessage('Registro de vehículos próximamente disponible.')">
+                            Abrir
+                        </button>
+                    </div>
+
                 </div>
+
             </div>
 
-            <div id="tab-economy" class="tab-content hidden space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-                                <div>
-                                    <h3 class="text-[11px] font-medium text-gray-300">Banco Digital Arica</h3>
-                                    <p class="text-2xl font-black text-white mt-1" id="bank-balance">$0 CLP</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] rounded-full font-semibold" id="active-pj-bank-label">Seleccione PJ</span>
-                            </div>
-                            <h4 class="text-[11px] font-semibold text-gray-300 uppercase tracking-wider mb-2">Últimos Movimientos</h4>
-                            <div id="transaction-history" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs">
-                                <div class="text-gray-400 text-center py-2 text-[11px]">No hay transacciones recientes.</div>
-                            </div>
-                        </div>
+
+            <div class="portal-card">
+
+                <h3>
+                    Teléfono
+                </h3>
+
+                <p>
+                    Sistema de comunicación entre ciudadanos
+                    y acceso a aplicaciones del universo ACRP.
+                </p>
+
+                <div class="portal-list">
+
+                    <div class="portal-item">
+                        <span>Mensajes</span>
+                        <button onclick="showMessage('Sistema de mensajes próximamente disponible.')">
+                            Entrar
+                        </button>
                     </div>
 
-                    <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center">
-                        <h3 class="text-[11px] font-semibold text-gray-300 mb-4 self-start uppercase tracking-wider">Tu Tarjeta de Débito (PJ Activo)</h3>
-                        <div class="w-full max-w-sm h-52 rounded-2xl p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between border border-white/20 bg-gradient-to-br from-slate-900 via-zinc-900 to-black">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-bold tracking-widest uppercase text-gray-200">Arica Banco</span>
-                                <img src="arica logo.png" class="w-7 h-7 rounded-full object-cover border border-white/40">
-                            </div>
-                            <div class="flex items-center space-x-3 my-auto">
-                                <div class="w-9 h-6 bg-amber-400/80 rounded border border-amber-600 flex items-center justify-center text-[8px] font-mono text-black font-bold">CHIP</div>
-                                <div class="text-base font-mono tracking-widest text-white">•••• •••• •••• 4026</div>
-                            </div>
-                            <div class="flex justify-between items-end text-[11px]">
-                                <div>
-                                    <p class="text-[8px] text-gray-400 uppercase tracking-wider">Titular Activo</p>
-                                    <p class="font-bold text-white tracking-wide uppercase text-xs" id="card-holder-name">SELECCIONE PJ</p>
-                                </div>
-                                <div>
-                                    <p class="text-[8px] text-gray-400 uppercase tracking-wider">Expira</p>
-                                    <p class="font-bold text-gray-200 text-xs">08/30</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="portal-item">
+                        <span>Marketplace</span>
+                        <button onclick="scrollToSection('marketplace')">
+                            Ver
+                        </button>
                     </div>
+
+                    <div class="portal-item">
+                        <span>Transferencias</span>
+                        <button onclick="showMessage('Sistema bancario próximamente disponible.')">
+                            Abrir
+                        </button>
+                    </div>
+
                 </div>
+
             </div>
 
-            <div id="tab-dealership" class="tab-content hidden space-y-6">
-                <div class="glass-card p-6 rounded-2xl">
-                    <div class="flex justify-between items-center mb-6">
-                        <div>
-                            <h2 class="text-xl font-bold text-white">Concesionario de Vehículos</h2>
-                            <p class="text-xs text-gray-300">Cada compra se asignará automáticamente al personaje activo seleccionado.</p>
-                        </div>
-                    </div>
-                    <div id="dealership-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-                </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================= -->
+
+    <section class="section" id="servicios">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Servicios
             </div>
 
-            <div id="tab-store" class="tab-content hidden space-y-6">
-                <div class="glass-card p-6 rounded-2xl">
-                    <div class="text-center mb-6">
-                        <h2 class="text-xl font-bold text-white">Tienda Oficial de Arica RP</h2>
-                        <p class="text-xs text-gray-300 mt-1">Compra licencias e items vinculados a tu personaje activo.</p>
-                    </div>
-                    <div id="store-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
-                    <div class="mt-8 pt-6 border-t border-white/10">
-                        <h3 class="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-3">Pertenencias del Personaje Activo</h3>
-                        <div id="user-inventory" class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-white/10 rounded-lg text-[11px] text-gray-300 border border-white/10">Seleccione un personaje activo</span>
-                        </div>
-                    </div>
+            <h2 class="section-title">
+                Todo lo necesario para tu RolePlay.
+            </h2>
+
+            <p class="section-description">
+                Herramientas diseñadas para complementar
+                la experiencia dentro de la ciudad.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    ID
                 </div>
+
+                <h3>
+                    Identidad
+                </h3>
+
+                <p>
+                    Consulta y administra tu DNI,
+                    información personal y datos de personaje.
+                </p>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    $
+                </div>
+
+                <h3>
+                    Banco
+                </h3>
+
+                <p>
+                    Gestiona cuentas, movimientos y
+                    transferencias dentro del sistema.
+                </p>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    CAR
+                </div>
+
+                <h3>
+                    Vehículos
+                </h3>
+
+                <p>
+                    Consulta registros, documentación
+                    y vehículos asociados a tu personaje.
+                </p>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    M
+                </div>
+
+                <h3>
+                    Marketplace
+                </h3>
+
+                <p>
+                    Publica vehículos y artículos para
+                    que otros ciudadanos puedan encontrarlos.
+                </p>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    MSG
+                </div>
+
+                <h3>
+                    Mensajería
+                </h3>
+
+                <p>
+                    Comunícate con otros usuarios mediante
+                    el teléfono integrado del portal.
+                </p>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    +
+                </div>
+
+                <h3>
+                    Servicios
+                </h3>
+
+                <p>
+                    Accede a herramientas adicionales
+                    desarrolladas para la comunidad.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MARKETPLACE
+    ========================= -->
+
+    <section class="section" id="marketplace">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Marketplace
             </div>
 
-            <div id="tab-police" class="tab-content hidden space-y-6">
-                <div class="glass-card p-6 rounded-2xl">
-                    <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
-                        <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
-                        <p class="text-xs text-gray-300">Ingrese su clave para acceder al sistema policial.</p>
-                        <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Clave Policial">
-                        <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Iniciar Sesión Policial</button>
-                    </div>
-                    <div id="police-dashboard" class="hidden space-y-6">
-                        <div class="flex justify-between items-center border-b border-white/10 pb-4">
-                            <div>
-                                <h2 class="text-base font-bold text-white">Sistema Integrado Policial (SIP)</h2>
-                                <p class="text-xs text-gray-300">Gestión de multas, antecedentes y órdenes de arresto.</p>
-                            </div>
-                            <button onclick="logoutPolice()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-300 border-rose-400/30">Cerrar Sesión</button>
-                        </div>
-                        <div class="flex gap-2">
-                            <input type="text" id="police-search-dni" class="glass-input flex-grow px-4 py-2 rounded-xl text-xs" placeholder="Buscar por Nombre o DNI...">
-                            <button onclick="searchCitizenPolice()" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold">Buscar</button>
-                        </div>
-                        <div id="police-search-result" class="space-y-4">
-                            <p class="text-xs text-gray-400 text-center py-4">Ingrese un nombre o DNI para consultar antecedentes.</p>
-                        </div>
-                    </div>
+            <h2 class="section-title">
+                Compra y vende dentro de la ciudad.
+            </h2>
+
+            <p class="section-description">
+                Espacio destinado a publicaciones de vehículos
+                y artículos de los ciudadanos.
+            </p>
+
+        </div>
+
+
+        <div class="marketplace">
+
+            <article class="market-card">
+
+                <div class="market-image">
+                    IMAGEN DEL VEHÍCULO
                 </div>
+
+                <div class="market-content">
+
+                    <h3>
+                        Vehículo publicado
+                    </h3>
+
+                    <p>
+                        Publicación de ciudadano
+                    </p>
+
+                    <div class="price">
+                        $0
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="market-card">
+
+                <div class="market-image">
+                    IMAGEN DEL VEHÍCULO
+                </div>
+
+                <div class="market-content">
+
+                    <h3>
+                        Vehículo publicado
+                    </h3>
+
+                    <p>
+                        Publicación de ciudadano
+                    </p>
+
+                    <div class="price">
+                        $0
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="market-card">
+
+                <div class="market-image">
+                    IMAGEN DEL ARTÍCULO
+                </div>
+
+                <div class="market-content">
+
+                    <h3>
+                        Artículo publicado
+                    </h3>
+
+                    <p>
+                        Publicación de ciudadano
+                    </p>
+
+                    <div class="price">
+                        $0
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACCESS
+    ========================= -->
+
+    <section class="section" id="accesos">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Accesos
             </div>
 
-            <div id="tab-staff" class="tab-content hidden space-y-6">
-                <div class="glass-card p-6 rounded-2xl">
-                    <div id="staff-login-box" class="max-w-md mx-auto space-y-4 text-center">
-                        <h2 class="text-xl font-bold text-white">Panel de Administración Staff</h2>
-                        <p class="text-xs text-gray-300">Acceso exclusivo para administradores de Arica RP.</p>
-                        <input type="password" id="staff-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Contraseña Staff">
-                        <button onclick="loginStaff()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Acceder al Panel</button>
-                    </div>
-                    <div id="staff-dashboard" class="hidden space-y-6">
-                        <div class="flex justify-between items-center border-b border-white/10 pb-4">
-                            <div>
-                                <h2 class="text-base font-bold text-white">Panel de Control Global Staff</h2>
-                                <p class="text-xs text-gray-300">Control total de economía, vehículos, DNIs y tienda.</p>
-                            </div>
-                            <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-300 border-rose-400/30">Cerrar Sesión</button>
-                        </div>
+            <h2 class="section-title">
+                Áreas de gestión.
+            </h2>
 
-                        <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/60 border border-amber-500/30">
-                            <div class="flex justify-between items-center">
-                                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider">📋 Auditoría Global: DNIs por Usuario de Discord</h3>
-                                <button onclick="renderStaffDiscordList()" class="glass-btn px-3 py-1 rounded text-[10px] text-amber-200">Actualizar Lista</button>
-                            </div>
-                            <p class="text-[11px] text-gray-300">Revisa aquí qué cuentas de Discord han creado DNIs y verifica si pertenecen al servidor oficial de Discord.</p>
-                            <div id="staff-discord-audit-list" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
-                        </div>
+            <p class="section-description">
+                Accesos separados para ciudadanos y personal
+                autorizado.
+            </p>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
-                                <h3 class="text-xs font-bold text-amber-400">Gestión de Ciudadanos / DNIs</h3>
-                                <input type="text" id="staff-dni-target" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Ingrese DNI exacto (Ej. AR-123456)">
-                                <div class="flex gap-2">
-                                    <input type="number" id="staff-money-amount" class="glass-input flex-grow px-3 py-2 rounded-xl text-xs" placeholder="Monto CLP (+ o -)">
-                                    <button onclick="staffModifyMoney()" class="glass-btn px-3 py-2 rounded-xl text-[11px] font-semibold">Ajustar Saldo</button>
-                                </div>
-                                <button onclick="staffDeleteCharacter()" class="w-full py-2 bg-rose-600/30 hover:bg-rose-600/50 border border-rose-500/40 rounded-xl text-xs font-semibold text-rose-200">Eliminar este DNI / Personaje</button>
-                            </div>
+        </div>
 
-                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
-                                <h3 class="text-xs font-bold text-blue-400">Concesionario Global</h3>
-                                <input type="text" id="new-car-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Vehículo">
-                                <input type="number" id="new-car-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
-                                <button onclick="staffAddCar()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Añadir Vehículo</button>
-                            </div>
 
-                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
-                                <h3 class="text-xs font-bold text-emerald-400">Tienda Oficial</h3>
-                                <input type="text" id="new-store-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Ítem / Licencia">
-                                <input type="number" id="new-store-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
-                                <button onclick="staffAddStoreItem()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Añadir a la Tienda</button>
-                            </div>
+        <div class="access-grid">
 
-                            <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/50">
-                                <h3 class="text-xs font-bold text-rose-400">Eliminar Catálogos</h3>
-                                <select id="staff-delete-catalog-select" class="glass-input w-full px-3 py-2 rounded-xl text-xs bg-slate-900">
-                                    <option value="cars">Vehículos del Concesionario</option>
-                                    <option value="store">Ítems de la Tienda</option>
-                                </select>
-                                <select id="staff-delete-item-select" class="glass-input w-full px-3 py-2 rounded-xl text-xs bg-slate-900"></select>
-                                <button onclick="staffDeleteItem()" class="w-full py-2 bg-rose-600/30 hover:bg-rose-600/50 border border-rose-500/40 rounded-xl text-xs font-semibold text-rose-200">Eliminar Elemento Seleccionado</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="access-card">
+
+                <h3>
+                    Portal Ciudadano
+                </h3>
+
+                <p>
+                    Accede a tu información personal,
+                    vehículos y herramientas de ciudadano.
+                </p>
+
+                <button
+                    class="access-button"
+                    onclick="openModal('citizen')">
+                    Ingresar
+                </button>
+
             </div>
 
-        </main>
 
-        <footer class="glass-bg py-4 px-4 text-center text-xs text-gray-300 mt-8 z-10">
-            <p>&copy; 2026 Arica Chile Roleplay. Todos los derechos reservados.</p>
-        </footer>
+            <div class="access-card">
+
+                <h3>
+                    Panel Staff
+                </h3>
+
+                <p>
+                    Área privada para la administración
+                    y moderación de la comunidad.
+                </p>
+
+                <button
+                    class="access-button"
+                    onclick="openModal('staff')">
+                    Acceso Staff
+                </button>
+
+            </div>
+
+
+            <div class="access-card">
+
+                <h3>
+                    Panel Policial
+                </h3>
+
+                <p>
+                    Herramientas destinadas al personal
+                    policial autorizado.
+                </p>
+
+                <button
+                    class="access-button"
+                    onclick="openModal('police')">
+                    Acceso Policial
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div>
+
+                <div class="footer-title">
+                    Arica Chile RolePlay
+                </div>
+
+                <div class="footer-text">
+                    Portal oficial de la comunidad.
+                </div>
+
+            </div>
+
+            <div class="footer-text">
+                © 2026 Arica Chile RolePlay
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         LOGIN MODAL
+    ========================= -->
+
+    <div class="modal" id="loginModal">
+
+        <div class="modal-box">
+
+            <div class="modal-top">
+
+                <h3 id="modalTitle">
+                    Iniciar sesión
+                </h3>
+
+                <button
+                    class="close"
+                    onclick="closeModal()">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    USUARIO
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Ingresa tu usuario">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    CONTRASEÑA
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Ingresa tu contraseña">
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="fakeLogin()">
+                Continuar
+            </button>
+
+
+            <p class="modal-note">
+                Este formulario es solamente la interfaz del portal.
+                Las credenciales reales no deben almacenarse dentro
+                de este archivo ni en JavaScript público.
+            </p>
+
+        </div>
+
     </div>
 
+
+    <!-- =========================
+         TOAST
+    ========================= -->
+
+    <div class="toast" id="toast">
+        Mensaje
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
     <script>
-        let db = JSON.parse(localStorage.getItem('arica_db_users')) || {};
-        let currentDiscord = localStorage.getItem('arica_current_user') || null;
-        let activePjId = localStorage.getItem('arica_active_pj') || null;
 
-        let globalState = JSON.parse(localStorage.getItem('arica_global_state')) || {
-            cars: [
-                { id: 1, name: "Nissan V16 Patrulla / Urbano", price: 2500000 },
-                { id: 2, name: "Toyota Hilux 4x4", price: 4800000 },
-                { id: 3, name: "Subaru Impreza WRX", price: 7200000 }
-            ],
-            storeItems: [
-                { id: 1, name: "Licencia de Conducir Clase B", price: 45000, type: "license", desc: "Documento obligatorio para automóviles." },
-                { id: 3, name: "Kit de Mecánica Rápida", price: 30000, type: "item", desc: "Herramientas de emergencia." }
-            ]
-        };
+        let currentAccess = "citizen";
 
-        window.onload = function() {
-            if(currentDiscord && db[currentDiscord]) {
-                initUserSession(currentDiscord);
-            }
-        };
+        function scrollToSection(id) {
 
-        function saveGlobalState() {
-            localStorage.setItem('arica_global_state', JSON.stringify(globalState));
-        }
+            const element = document.getElementById(id);
 
-        function scrollToHome() {
-            document.getElementById('home-hero')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+            if (!element) return;
 
-        function switchAuthMode(mode) {
-            const formLogin = document.getElementById('form-login');
-            const formRegister = document.getElementById('form-register');
-            const formRecovery = document.getElementById('form-recovery');
-
-            formLogin.classList.add('hidden');
-            formRegister.classList.add('hidden');
-            formRecovery.classList.add('hidden');
-
-            document.getElementById('tab-login-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
-            document.getElementById('tab-reg-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
-            document.getElementById('tab-rec-btn').className = "flex-1 pb-2 text-xs font-semibold text-gray-400 border-b-2 border-transparent";
-
-            if(mode === 'login') {
-                formLogin.classList.remove('hidden');
-                document.getElementById('tab-login-btn').className = "flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white";
-            } else if(mode === 'register') {
-                formRegister.classList.remove('hidden');
-                document.getElementById('tab-reg-btn').className = "flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white";
-            } else if(mode === 'recovery') {
-                formRecovery.classList.remove('hidden');
-                document.getElementById('tab-rec-btn').className = "flex-1 pb-2 text-xs font-bold text-white border-b-2 border-white";
-            }
-        }
-
-        function handleRegister() {
-            const discord = document.getElementById('reg-discord').value.trim();
-            const pass = document.getElementById('reg-pass').value.trim();
-
-            if(!discord || !pass) {
-                alert("Por favor completa tu nombre de Discord y contraseña.");
-                return;
-            }
-
-            if(db[discord]) {
-                alert("Este nombre de usuario de Discord ya está registrado. Inicia sesión.");
-                return;
-            }
-
-            db[discord] = {
-                password: pass,
-                recoveryCount: 0,
-                characters: []
-            };
-
-            saveDatabase();
-            alert("¡Cuenta registrada con éxito! Ahora inicia sesión.");
-            switchAuthMode('login');
-        }
-
-        function handleLogin() {
-            const discord = document.getElementById('login-discord').value.trim();
-            const pass = document.getElementById('login-pass').value.trim();
-
-            if(!db[discord] || db[discord].password !== pass) {
-                alert("Usuario o contraseña incorrectos.");
-                return;
-            }
-
-            currentDiscord = discord;
-            localStorage.setItem('arica_current_user', discord);
-            initUserSession(discord);
-        }
-
-        function handleRecovery() {
-            const discord = document.getElementById('rec-discord').value.trim();
-            const newPass = document.getElementById('rec-new-pass').value.trim();
-
-            if(!discord || !newPass) {
-                alert("Introduce tu nombre de Discord y la nueva contraseña.");
-                return;
-            }
-
-            if(!db[discord]) {
-                alert("La cuenta de Discord especificada no existe en la base de datos.");
-                return;
-            }
-
-            if(db[discord].recoveryCount === undefined) {
-                db[discord].recoveryCount = 0;
-            }
-
-            if(db[discord].recoveryCount >= 3) {
-                alert("Has alcanzado el límite máximo de 3 recuperaciones de contraseña permitidas para esta cuenta.");
-                return;
-            }
-
-            db[discord].recoveryCount += 1;
-            db[discord].password = newPass;
-            saveDatabase();
-
-            alert(`¡Contraseña restablecida con éxito! Usos de recuperación restantes: ${3 - db[discord].recoveryCount}`);
-            switchAuthMode('login');
-        }
-
-        function logoutSession() {
-            currentDiscord = null;
-            activePjId = null;
-            localStorage.removeItem('arica_current_user');
-            localStorage.removeItem('arica_active_pj');
-            document.getElementById('auth-screen').classList.remove('hidden');
-            document.getElementById('main-app').classList.add('hidden');
-        }
-
-        function initUserSession(discord) {
-            document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            document.getElementById('current-user-tag').innerText = discord;
-
-            const chars = db[discord].characters;
-            if(chars.length > 0) {
-                if(!activePjId || !chars.some(c => c.id === activePjId)) {
-                    activePjId = chars[0].id;
-                }
-            } else {
-                activePjId = null;
-            }
-
-            updateGlobalActiveSelector();
-            renderDniCards();
-            updateBankUI();
-            renderInventory();
-            renderStore();
-            switchTab('identity');
-        }
-
-        function saveDatabase() {
-            localStorage.setItem('arica_db_users', JSON.stringify(db));
-        }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-
-            document.querySelectorAll('nav button').forEach(btn => {
-                if(!btn.classList.contains('text-rose-300')) {
-                    btn.classList.remove('bg-white/25', 'border-white/50');
-                }
-            });
-            const activeBtn = document.getElementById(`btn-${tabId}`);
-            if(activeBtn) activeBtn.classList.add('bg-white/25', 'border-white/50');
-
-            if(tabId === 'dealership') renderDealership();
-            if(tabId === 'store') renderStore();
-            if(tabId === 'staff') {
-                updateStaffDeleteDropdown();
-                renderStaffDiscordList();
-            }
-        }
-
-        function registerCharacter() {
-            const name = document.getElementById('char-name').value.trim();
-            const lastname = document.getElementById('char-lastname').value.trim();
-            const age = document.getElementById('char-age').value.trim();
-            const gender = document.getElementById('char-gender').value;
-            const nacionality = document.getElementById('char-nacionality').value.trim();
-
-            if(!name || !lastname || !age) {
-                alert("Complete todos los campos del DNI.");
-                return;
-            }
-
-            const userChars = db[currentDiscord].characters;
-            if(userChars.length >= 2) {
-                alert("Ya tienes el límite máximo de 2 personajes registrados.");
-                return;
-            }
-
-            const newDni = {
-                id: 'AR-' + Math.floor(100000 + Math.random() * 900000),
-                name: name,
-                lastname: lastname,
-                age: age,
-                gender: gender,
-                nacionality: nacionality || 'Chilena',
-                balance: 800000,
-                transactions: [
-                    { text: "Bono de Bienvenida Inicial", amount: "+ $800.000", type: "income" }
-                ],
-                inventory: [],
-                criminalStatus: 'Sin Antecedentes',
-                fines: [],
-                records: [],
-                jail: 0
-            };
-
-            userChars.push(newDni);
-            saveDatabase();
-
-            if(userChars.length === 1) {
-                activePjId = newDni.id;
-            }
-
-            document.getElementById('char-name').value = '';
-            document.getElementById('char-lastname').value = '';
-            document.getElementById('char-age').value = '';
-
-            updateGlobalActiveSelector();
-            renderDniCards();
-            updateBankUI();
-            renderInventory();
-        }
-
-        function showNewDniForm() {
-            const userChars = db[currentDiscord].characters;
-            if(userChars.length >= 2) {
-                alert("Solo puedes tener un máximo de 2 personajes.");
-                return;
-            }
-            document.getElementById('char-name').value = '';
-            document.getElementById('char-lastname').value = '';
-            document.getElementById('char-age').value = '';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function updateGlobalActiveSelector() {
-            const select = document.getElementById('global-active-pj');
-            const userChars = db[currentDiscord].characters;
-            select.innerHTML = '';
-
-            if(userChars.length === 0) {
-                select.innerHTML = '<option value="">Crea un DNI primero</option>';
-                document.getElementById('new-pj-btn-box').classList.remove('hidden');
-                return;
-            }
-
-            userChars.forEach(char => {
-                const selected = char.id === activePjId ? 'selected' : '';
-                select.innerHTML += `<option value="${char.id}" ${selected}>${char.name} ${char.lastname} (${char.id})</option>`;
-            });
-
-            if(userChars.length >= 2) {
-                document.getElementById('new-pj-btn-box').classList.add('hidden');
-            } else {
-                document.getElementById('new-pj-btn-box').classList.remove('hidden');
-            }
-        }
-
-        function changeActiveCharacter(id) {
-            activePjId = id;
-            localStorage.setItem('arica_active_pj', id);
-            updateBankUI();
-            renderInventory();
-            renderDniCards();
-        }
-
-        function getActiveCharacter() {
-            if(!currentDiscord || !activePjId || !db[currentDiscord]) return null;
-            return db[currentDiscord].characters.find(c => c.id === activePjId);
-        }
-
-        function renderDniCards() {
-            const container = document.getElementById('dni-cards-list');
-            container.innerHTML = '';
-            const userChars = db[currentDiscord].characters;
-
-            userChars.forEach((char) => {
-                const isActive = char.id === activePjId;
-                let finesHtml = char.fines && char.fines.length > 0 ? char.fines.map(f => `<p class="text-rose-300">• $${f.amount.toLocaleString()} - ${f.reason}</p>`).join('') : '<p class="text-gray-400">Sin multas activas</p>';
-                let jailHtml = char.jail > 0 ? `<p class="text-amber-400 font-bold">⚠️ Condena Prisión / Cárcel: ${char.jail} meses</p>` : `<p class="text-emerald-300">Libre</p>`;
-
-                container.innerHTML += `
-                    <div class="glass-card p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between bg-slate-950/70 border ${isActive ? 'border-emerald-500/60 shadow-emerald-900/30 shadow-lg' : 'border-white/20'}">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-[9px] text-gray-400 uppercase tracking-widest">República de Chile • Arica RP</span>
-                                <h4 class="text-sm font-black text-white mt-0.5">${char.name} ${char.lastname}</h4>
-                            </div>
-                            <img src="arica logo.png" class="w-8 h-8 rounded-full object-cover border border-white/40">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 my-3 text-[11px] text-gray-200">
-                            <p><b>DNI:</b> ${char.id}</p>
-                            <p><b>Edad:</b> ${char.age} años</p>
-                            <p><b>Género:</b> ${char.gender}</p>
-                            <p><b>Estado:</b> <span class="text-emerald-300 font-semibold">${char.criminalStatus}</span></p>
-                        </div>
-                        <div class="my-2 p-2 rounded bg-black/40 text-[10px] space-y-1 border border-white/10">
-                            <p class="font-bold text-gray-300">Multas:</p>
-                            ${finesHtml}
-                            <div class="mt-1">${jailHtml}</div>
-                        </div>
-                        <div class="flex justify-between items-center pt-2 border-t border-white/10 text-[10px]">
-                            <span class="${isActive ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${isActive ? 'Personaje Activo' : 'Personaje Secundario'}</span>
-                            ${!isActive ? `<button onclick="changeActiveCharacter('${char.id}')" class="glass-btn px-3 py-1 rounded text-[10px]">Seleccionar</button>` : ''}
-                        </div>
-                    </div>
-                `;
+            element.scrollIntoView({
+                behavior: "smooth"
             });
         }
 
-        function updateBankUI() {
-            const char = getActiveCharacter();
-            if(!char) {
-                document.getElementById('bank-balance').innerText = '$0 CLP';
-                document.getElementById('active-pj-bank-label').innerText = 'Sin PJ Activo';
-                document.getElementById('card-holder-name').innerText = 'SELECCIONE PJ';
-                document.getElementById('transaction-history').innerHTML = '<div class="text-gray-400 text-center py-2 text-[11px]">Debe seleccionar un personaje activo.</div>';
+
+        function openModal(type) {
+
+            currentAccess = type;
+
+            const modal = document.getElementById("loginModal");
+            const title = document.getElementById("modalTitle");
+
+            if (type === "staff") {
+                title.textContent = "Acceso Staff";
+            }
+
+            else if (type === "police") {
+                title.textContent = "Acceso Policial";
+            }
+
+            else if (type === "citizen") {
+                title.textContent = "Portal Ciudadano";
+            }
+
+            else {
+                title.textContent = "Iniciar sesión";
+            }
+
+            modal.classList.add("active");
+
+            document.body.classList.add("modal-open");
+        }
+
+
+        function closeModal() {
+
+            document
+                .getElementById("loginModal")
+                .classList.remove("active");
+
+            document.body.classList.remove("modal-open");
+        }
+
+
+        function fakeLogin() {
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            if (!username || !password) {
+
+                showMessage(
+                    "Completa usuario y contraseña."
+                );
+
                 return;
             }
 
-            document.getElementById('bank-balance').innerText = '$' + char.balance.toLocaleString('es-CL') + ' CLP';
-            document.getElementById('active-pj-bank-label').innerText = char.name + ' ' + char.lastname;
-            document.getElementById('card-holder-name').innerText = `${char.name} ${char.lastname}`;
+            /*
+                IMPORTANTE:
 
-            const history = document.getElementById('transaction-history');
-            history.innerHTML = '';
-            char.transactions.forEach(tx => {
-                history.innerHTML += `
-                    <div class="flex justify-between items-center p-2 rounded-lg bg-white/5 border border-white/10 text-[11px]">
-                        <span class="text-gray-200">${tx.text}</span>
-                        <span class="${tx.type === 'income' ? 'text-emerald-400' : 'text-rose-400'} font-bold">${tx.amount}</span>
-                    </div>
-                `;
-            });
+                NO pongas aquí contraseñas reales.
+
+                GitHub Pages es hosting estático y todo el
+                JavaScript enviado al navegador puede ser
+                inspeccionado por cualquier persona.
+
+                Para Staff / Policía necesitas un backend,
+                Firebase, Supabase u otro sistema de autenticación.
+            */
+
+            closeModal();
+
+            showMessage(
+                "La interfaz está lista. Falta conectar la autenticación segura."
+            );
         }
 
-        function renderDealership() {
-            const grid = document.getElementById('dealership-grid');
-            grid.innerHTML = '';
-            globalState.cars.forEach(car => {
-                grid.innerHTML += `
-                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-white text-center text-xs">${car.name}</h3>
-                            <p class="text-xs text-emerald-400 mt-1 text-center font-semibold">$${car.price.toLocaleString('es-CL')} CLP</p>
-                        </div>
-                        <button onclick="buyCar('${car.name}', ${car.price})" class="mt-4 w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Comprar con PJ Activo</button>
-                    </div>
-                `;
-            });
+
+        function showMessage(message) {
+
+            const toast =
+                document.getElementById("toast");
+
+            toast.textContent = message;
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+
+                toast.classList.remove("show");
+
+            }, 3500);
         }
 
-        function buyCar(name, price) {
-            const char = getActiveCharacter();
-            if(!char) { alert("Seleccione un personaje activo para realizar la compra."); return; }
 
-            if(char.balance >= price) {
-                char.balance -= price;
-                char.transactions.unshift({ text: `Compra de vehículo: ${name}`, amount: `- $${price.toLocaleString('es-CL')}`, type: "expense" });
-                saveDatabase();
-                updateBankUI();
-                alert(`¡${char.name} ha adquirido exitosamente el ${name}!`);
-            } else {
-                alert("El personaje activo no tiene suficiente dinero en el banco.");
-            }
+        function toggleMobileMenu() {
+
+            showMessage(
+                "En móvil puedes utilizar las secciones desplazándote por la página."
+            );
         }
 
-        function renderStore() {
-            const grid = document.getElementById('store-grid');
-            grid.innerHTML = '';
-            globalState.storeItems.forEach(item => {
-                grid.innerHTML += `
-                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-white text-xs text-center">${item.name}</h3>
-                            <p class="text-[11px] text-gray-300 mt-2 text-center">${item.desc}</p>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                            <span class="text-emerald-400 font-bold text-xs">$${item.price.toLocaleString('es-CL')} CLP</span>
-                            <button onclick="buyStoreItem('${item.name}', ${item.price})" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
 
-        function buyStoreItem(name, price) {
-            const char = getActiveCharacter();
-            if(!char) { alert("Seleccione un personaje activo para realizar la compra."); return; }
+        document
+            .getElementById("loginModal")
+            .addEventListener("click", function(event) {
 
-            if(char.balance >= price) {
-                char.balance -= price;
-                char.inventory.push(name);
-                char.transactions.unshift({ text: `Compra en tienda: ${name}`, amount: `- $${price.toLocaleString('es-CL')}`, type: "expense" });
-                saveDatabase();
-                updateBankUI();
-                renderInventory();
-                alert(`¡${char.name} ha adquirido ${name} con éxito!`);
-            } else {
-                alert("Saldo insuficiente en la cuenta del personaje activo.");
-            }
-        }
-
-        function renderInventory() {
-            const inv = document.getElementById('user-inventory');
-            inv.innerHTML = '';
-            const char = getActiveCharacter();
-            if(!char || char.inventory.length === 0) {
-                inv.innerHTML = '<span class="px-3 py-1 bg-white/10 rounded-lg text-[11px] text-gray-300 border border-white/10">Ningún objeto adquirido para este personaje</span>';
-                return;
-            }
-            char.inventory.forEach(item => {
-                inv.innerHTML += `<span class="px-3 py-1 bg-white/20 rounded-lg text-[11px] text-white border border-white/30 font-medium">${item}</span>`;
-            });
-        }
-
-        function loginPolice() {
-            const pass = document.getElementById('police-pass').value.trim();
-            if (pass !== "AricaLegal") {
-                alert("Contraseña policial incorrecta.");
-                return;
-            }
-            document.getElementById('police-login-box').classList.add('hidden');
-            document.getElementById('police-dashboard').classList.remove('hidden');
-        }
-
-        function logoutPolice() {
-            document.getElementById('police-login-box').classList.remove('hidden');
-            document.getElementById('police-dashboard').classList.add('hidden');
-            document.getElementById('police-pass').value = '';
-        }
-
-        function searchCitizenPolice() {
-            const query = document.getElementById('police-search-dni').value.toLowerCase();
-            const resultBox = document.getElementById('police-search-result');
-            resultBox.innerHTML = '';
-
-            let allChars = [];
-            Object.keys(db).forEach(user => {
-                db[user].characters.forEach(c => allChars.push({ user, char: c }));
-            });
-
-            const found = allChars.filter(item => item.char.name.toLowerCase().includes(query) || item.char.id.toLowerCase().includes(query));
-
-            if(found.length === 0) {
-                resultBox.innerHTML = '<p class="text-xs text-rose-400 text-center py-2">No se encontró ningún ciudadano con ese registro.</p>';
-                return;
-            }
-
-            found.forEach(item => {
-                const char = item.char;
-                resultBox.innerHTML += `
-                    <div class="glass-card p-4 rounded-xl space-y-3" id="police-card-${char.id}">
-                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                            <h4 class="font-bold text-white text-xs">${char.name} ${char.lastname} (${char.id})</h4>
-                            <span class="px-2 py-0.5 rounded text-[9px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30">${char.criminalStatus}</span>
-                        </div>
-                        <div class="text-[11px] text-gray-300 space-y-1">
-                            <p><b>Saldo:</b> $${char.balance.toLocaleString('es-CL')}</p>
-                            <p><b>Cárcel Actual:</b> <span class="text-amber-400 font-bold">${char.jail} meses</span></p>
-                            <p><b>Antecedentes:</b> ${char.records && char.records.length > 0 ? char.records.join(', ') : 'Ninguno'}</p>
-                        </div>
-                        <div class="pt-2 border-t border-white/10 space-y-2">
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="police-fine-reason-${char.id}" class="glass-input px-2 py-1.5 rounded text-[10px]" placeholder="Motivo de multa">
-                                <input type="number" id="police-fine-amount-${char.id}" class="glass-input px-2 py-1.5 rounded text-[10px]" placeholder="Monto multa ($)">
-                            </div>
-                            <button onclick="policeAddFine('${char.id}')" class="w-full glass-btn py-1.5 rounded text-[10px] font-semibold">Aplicar Multa</button>
-
-                            <div class="grid grid-cols-2 gap-2 mt-2">
-                                <input type="text" id="police-record-text-${char.id}" class="glass-input px-2 py-1.5 rounded text-[10px]" placeholder="Nuevo antecedente">
-                                <button onclick="policeAddRecord('${char.id}')" class="glass-btn py-1.5 rounded text-[10px] font-semibold">Añadir Antecedente</button>
-                            </div>
-
-                            <div class="flex gap-2 mt-2">
-                                <input type="number" id="police-jail-months-${char.id}" class="glass-input flex-grow px-2 py-1.5 rounded text-[10px]" placeholder="Meses de prisión preventiva / cárcel">
-                                <button onclick="policeSetJail('${char.id}')" class="glass-btn px-3 py-1.5 rounded text-[10px] font-semibold bg-amber-600/30 text-amber-200">Asignar Condena</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function policeAddFine(dni) {
-            const reason = document.getElementById(`police-fine-reason-${dni}`).value.trim();
-            const amount = parseInt(document.getElementById(`police-fine-amount-${dni}`).value);
-
-            if(!reason || isNaN(amount)) { alert("Complete motivo y monto de la multa."); return; }
-
-            for(let user in db) {
-                let char = db[user].characters.find(c => c.id === dni);
-                if(char) {
-                    if(!char.fines) char.fines = [];
-                    char.fines.push({ reason, amount });
-                    char.balance -= amount;
-                    char.transactions.unshift({ text: `Multa Policial: ${reason}`, amount: `- $${amount.toLocaleString()}`, type: "expense" });
-                    saveDatabase();
-                    alert("Multa aplicada con éxito al ciudadano.");
-                    searchCitizenPolice();
-                    return;
-                }
-            }
-        }
-
-        function policeAddRecord(dni) {
-            const text = document.getElementById(`police-record-text-${dni}`).value.trim();
-            if(!text) { alert("Escriba el antecedente."); return; }
-
-            for(let user in db) {
-                let char = db[user].characters.find(c => c.id === dni);
-                if(char) {
-                    if(!char.records) char.records = [];
-                    char.records.push(text);
-                    char.criminalStatus = 'Con Antecedentes';
-                    saveDatabase();
-                    alert("Antecedente registrado correctamente.");
-                    searchCitizenPolice();
-                    return;
-                }
-            }
-        }
-
-        function policeSetJail(dni) {
-            const months = parseInt(document.getElementById(`police-jail-months-${dni}`).value);
-            if(isNaN(months)) { alert("Ingrese cantidad de meses."); return; }
-
-            for(let user in db) {
-                let char = db[user].characters.find(c => c.id === dni);
-                if(char) {
-                    char.jail = months;
-                    char.criminalStatus = months > 0 ? 'En Prisión Preventiva' : 'Sin Antecedentes';
-                    saveDatabase();
-                    alert(`Condena actualizada a ${months} meses de cárcel.`);
-                    searchCitizenPolice();
-                    return;
-                }
-            }
-        }
-
-        function loginStaff() {
-            const pass = document.getElementById('staff-pass').value.trim();
-            if (pass !== "AricaStaff") {
-                alert("Contraseña Staff incorrecta.");
-                return;
-            }
-            document.getElementById('staff-login-box').classList.add('hidden');
-            document.getElementById('staff-dashboard').classList.remove('hidden');
-            updateStaffDeleteDropdown();
-            renderStaffDiscordList();
-        }
-
-        function logoutStaff() {
-            document.getElementById('staff-login-box').classList.remove('hidden');
-            document.getElementById('staff-dashboard').classList.add('hidden');
-            document.getElementById('staff-pass').value = '';
-        }
-
-        function renderStaffDiscordList() {
-            const container = document.getElementById('staff-discord-audit-list');
-            container.innerHTML = '';
-
-            const users = Object.keys(db);
-            if(users.length === 0) {
-                container.innerHTML = '<p class="text-xs text-gray-400 text-center py-3">No hay cuentas de usuario registradas en el portal.</p>';
-                return;
-            }
-
-            users.forEach(discordTag => {
-                const userData = db[discordTag];
-                const chars = userData.characters || [];
-                const recCount = userData.recoveryCount || 0;
-
-                let charsHtml = '';
-                if(chars.length === 0) {
-                    charsHtml = '<p class="text-[10px] text-gray-400 italic">Este usuario aún no ha creado ningún DNI.</p>';
-                } else {
-                    charsHtml = chars.map(c => `
-                        <div class="flex justify-between items-center bg-black/40 px-3 py-1.5 rounded-lg border border-white/10 text-[11px]">
-                            <div>
-                                <span class="font-bold text-white">${c.name} ${c.lastname}</span> 
-                                <span class="text-amber-300 font-mono text-[10px]">(${c.id})</span>
-                            </div>
-                            <div class="text-right text-[10px] text-gray-300">
-                                <span>Saldo: $${c.balance.toLocaleString()}</span> | 
-                                <button onclick="document.getElementById('staff-dni-target').value='${c.id}'; window.scrollTo({top: 400, behavior:'smooth'});" class="text-blue-400 hover:underline ml-1 font-semibold">Gestionar</button>
-                            </div>
-                        </div>
-                    `).join('');
+                if (event.target === this) {
+                    closeModal();
                 }
 
-                container.innerHTML += `
-                    <div class="glass-card p-3.5 rounded-xl space-y-2 bg-slate-900/80 border border-white/15">
-                        <div class="flex justify-between items-center border-b border-white/10 pb-1.5">
-                            <span class="font-bold text-xs text-amber-400">👤 Discord: ${discordTag}</span>
-                            <span class="text-[10px] text-gray-400">Recuperaciones clave: <b class="text-white">${recCount}/3</b> | Total DNIs: <b class="text-emerald-400">${chars.length}/2</b></span>
-                        </div>
-                        <div class="space-y-1">
-                            ${charsHtml}
-                        </div>
-                    </div>
-                `;
             });
-        }
 
-        function staffModifyMoney() {
-            const dni = document.getElementById('staff-dni-target').value.trim();
-            const amount = parseInt(document.getElementById('staff-money-amount').value);
 
-            if(!dni || isNaN(amount)) { alert("Ingrese DNI válido y monto."); return; }
+        document.addEventListener(
+            "keydown",
+            function(event) {
 
-            let found = false;
-            for(let user in db) {
-                let char = db[user].characters.find(c => c.id === dni);
-                if(char) {
-                    char.balance += amount;
-                    char.transactions.unshift({ text: "Ajuste Administrativo Staff", amount: `${amount >= 0 ? '+' : ''} $${amount.toLocaleString()}`, type: amount >= 0 ? 'income' : 'expense' });
-                    saveDatabase();
-                    found = true;
-                    alert(`Saldo modificado con éxito para ${char.name}. Nuevo saldo: $${char.balance.toLocaleString()}`);
-                    updateBankUI();
-                    renderStaffDiscordList();
-                    break;
+                if (event.key === "Escape") {
+                    closeModal();
                 }
+
             }
-            if(!found) alert("No se encontró ningún personaje con ese DNI.");
-        }
+        );
 
-        function staffDeleteCharacter() {
-            const dni = document.getElementById('staff-dni-target').value.trim();
-            if(!dni) { alert("Ingrese el DNI del personaje a eliminar."); return; }
-            if(!confirm(`¿Estás seguro de eliminar permanentemente el DNI ${dni}?`)) return;
-
-            let deleted = false;
-            for(let user in db) {
-                let index = db[user].characters.findIndex(c => c.id === dni);
-                if(index !== -1) {
-                    db[user].characters.splice(index, 1);
-                    saveDatabase();
-                    deleted = true;
-                    alert("Personaje eliminado correctamente.");
-                    if(activePjId === dni) {
-                        activePjId = db[user].characters.length > 0 ? db[user].characters[0].id : null;
-                        localStorage.setItem('arica_active_pj', activePjId);
-                    }
-                    if(currentDiscord) initUserSession(currentDiscord);
-                    renderStaffDiscordList();
-                    break;
-                }
-            }
-            if(!deleted) alert("DNI no encontrado.");
-        }
-
-        function staffAddCar() {
-            const name = document.getElementById('new-car-name').value.trim();
-            const price = parseInt(document.getElementById('new-car-price').value);
-
-            if(!name || isNaN(price)) { alert("Complete los datos del vehículo."); return; }
-
-            globalState.cars.push({ id: Date.now(), name: name, price: price });
-            saveGlobalState();
-            alert("Vehículo agregado al concesionario global.");
-            document.getElementById('new-car-name').value = '';
-            document.getElementById('new-car-price').value = '';
-            renderDealership();
-        }
-
-        function staffAddStoreItem() {
-            const name = document.getElementById('new-store-name').value.trim();
-            const price = parseInt(document.getElementById('new-store-price').value);
-
-            if(!name || isNaN(price)) { alert("Complete los datos del ítem."); return; }
-
-            globalState.storeItems.push({ id: Date.now(), name: name, price: price, type: 'item', desc: 'Objeto oficial de tienda.' });
-            saveGlobalState();
-            alert("Ítem añadido a la tienda con éxito.");
-            document.getElementById('new-store-name').value = '';
-            document.getElementById('new-store-price').value = '';
-            renderStore();
-            updateStaffDeleteDropdown();
-        }
-
-        function updateStaffDeleteDropdown() {
-            const catalog = document.getElementById('staff-delete-catalog-select').value;
-            const select = document.getElementById('staff-delete-item-select');
-            select.innerHTML = '';
-
-            if(catalog === 'cars') {
-                globalState.cars.forEach(car => {
-                    select.innerHTML += `<option value="${car.id}">${car.name} ($${car.price.toLocaleString()})</option>`;
-                });
-            } else {
-                globalState.storeItems.forEach(item => {
-                    select.innerHTML += `<option value="${item.id}">${item.name} ($${item.price.toLocaleString()})</option>`;
-                });
-            }
-        }
-
-        document.getElementById('staff-delete-catalog-select').addEventListener('change', updateStaffDeleteDropdown);
-
-        function staffDeleteItem() {
-            const catalog = document.getElementById('staff-delete-catalog-select').value;
-            const id = parseInt(document.getElementById('staff-delete-item-select').value);
-
-            if(isNaN(id)) { alert("Seleccione un elemento válido."); return; }
-
-            if(catalog === 'cars') {
-                globalState.cars = globalState.cars.filter(c => c.id !== id);
-                alert("Vehículo eliminado del concesionario.");
-            } else {
-                globalState.storeItems = globalState.storeItems.filter(i => i.id !== id);
-                alert("Ítem eliminado de la tienda.");
-            }
-            saveGlobalState();
-            renderDealership();
-            renderStore();
-            updateStaffDeleteDropdown();
-        }
     </script>
+
 </body>
 </html>
