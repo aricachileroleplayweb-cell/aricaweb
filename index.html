@@ -1238,6 +1238,64 @@
             renderStore();
             updateStaffDeleteDropdown();
         }
+        <!-- SDK de Firebase -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // Tus credenciales configuradas de Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBw2s2yliDuMxBV8jIijl0tJkGSKqaQJqg",
+        authDomain: "arica-web-portal.firebaseapp.com",
+        databaseURL: "https://arica-web-portal-default-rtdb.firebaseio.com",
+        projectId: "arica-web-portal",
+        storageBucket: "arica-web-portal.firebasestorage.app",
+        messagingSenderId: "180673537657",
+        appId: "1:180673537657:web:70ce6ea78cc06fb7fc16a8",
+        measurementId: "G-5V0QD0RY25"
+    };
+
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Función global para registrar el DNI en la base de datos
+    window.guardarDniEnFirebase = async function() {
+        const nombre = document.getElementById('inputNombre').value;
+        const discord = document.getElementById('inputDiscord').value;
+        const dni = document.getElementById('inputDni').value;
+        const estado = document.getElementById('estadoRegistro');
+
+        if (!nombre || !discord || !dni) {
+            estado.innerText = "⚠️ Por favor, completa todos los campos.";
+            estado.style.color = "#ff4d5f";
+            return;
+        }
+
+        try {
+            estado.innerText = "Guardando en la base de datos...";
+            
+            await addDoc(collection(db, "ciudadanos"), {
+                nombre: nombre,
+                discord: discord,
+                dni: dni,
+                fecha: new Date().toISOString()
+            });
+
+            estado.innerText = "✅ ¡DNI creado y guardado con éxito!";
+            estado.style.color = "#40d98a";
+            
+            setTimeout(() => {
+                closeModal();
+            }, 2000);
+
+        } catch (error) {
+            console.error("Error al guardar: ", error);
+            estado.innerText = "❌ Error al conectar con la base de datos.";
+            estado.style.color = "#ff4d5f";
+        }
+    };
+</script>
     </script>
 </body>
 </html>
