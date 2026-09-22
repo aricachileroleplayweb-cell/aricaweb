@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arica Chile Roleplay - Portal</title>
+    <title>Arica Chile Roleplay - Portal de Acceso</title>
     <style>
         :root {
             --primary: #5865F2;
@@ -34,32 +34,61 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             text-align: center;
             box-sizing: border-box;
         }
 
         h1 {
-            margin-bottom: 10px;
-            font-size: 24px;
+            margin-bottom: 5px;
+            font-size: 22px;
         }
 
         p {
             color: var(--text-muted);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: #0f1115;
+            border: 1px solid #2b2d31;
+            border-radius: 6px;
+            color: white;
             font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         .btn {
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            margin-top: 10px;
             transition: opacity 0.2s;
         }
 
@@ -67,7 +96,25 @@
             opacity: 0.9;
         }
 
-        /* MODAL */
+        .links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .links a:hover {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        /* MODALES */
         .modal {
             display: none;
             position: fixed;
@@ -116,33 +163,6 @@
             color: var(--text);
         }
 
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            background-color: #0f1115;
-            border: 1px solid #2b2d31;
-            border-radius: 6px;
-            color: white;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
         .modal-button {
             background-color: var(--success);
             color: #0f1115;
@@ -156,10 +176,6 @@
             margin-top: 10px;
         }
 
-        .modal-button:hover {
-            opacity: 0.9;
-        }
-
         .modal-note {
             margin-top: 15px;
             font-size: 12px;
@@ -170,44 +186,106 @@
 </head>
 <body>
 
+    <!-- PANEL DE INICIO DE SESIÓN ORIGINAL -->
     <div class="container">
         <h1>Arica Chile Roleplay</h1>
-        <p>Portal oficial de registro ciudadano y gestión de documentos.</p>
-        <button class="btn" onclick="openModal()">Crear / Registrar DNI</button>
-    </div>
-
-    <!-- MODAL DE REGISTRO -->
-    <div class="modal" id="appModal">
-        <div class="modal-box">
-            <div class="modal-top">
-                <h3 id="modalTitle">Registro de DNI</h3>
-                <button class="close" onclick="closeModal()">✕</button>
-            </div>
-            <div class="input-group">
-                <label>Nombre del Ciudadano</label>
-                <input type="text" id="inputNombre" placeholder="Ej: Juan Pérez">
-            </div>
-            <div class="input-group">
-                <label>Discord ID / Usuario</label>
-                <input type="text" id="inputDiscord" placeholder="Ej: user#1234">
-            </div>
-            <div class="input-group">
-                <label>Número de DNI</label>
-                <input type="text" id="inputDni" placeholder="Ej: 18.234.567-K">
-            </div>
-            <button class="modal-button" onclick="guardarDniEnFirebase()">Guardar en Base de Datos</button>
-            <div class="modal-note" id="estadoRegistro">Completa tus datos para registrarte oficialmente.</div>
+        <p>Inicia sesión con tu perfil de Discord para acceder</p>
+        
+        <div class="input-group">
+            <label>Perfil de Discord / Usuario</label>
+            <input type="text" id="loginDiscord" placeholder="Ej: user#1234">
+        </div>
+        <div class="input-group">
+            <label>Contraseña o PIN</label>
+            <input type="password" id="loginPass" placeholder="••••••••">
+        </div>
+        
+        <button class="btn" onclick="intentarLogin()">Iniciar Sesión</button>
+        
+        <div class="links">
+            <a onclick="openRecuperar()">¿Olvidaste tu contraseña?</a>
+            <a onclick="openRegistro()">Crear DNI / Registrarse</a>
         </div>
     </div>
 
-    <!-- SCRIPTS DE LA INTERFAZ Y FIREBASE -->
+    <!-- MODAL DE REGISTRO / CREAR DNI -->
+    <div class="modal" id="modalRegistro">
+        <div class="modal-box">
+            <div class="modal-top">
+                <h3>Registro de DNI</h3>
+                <button class="close" onclick="closeModales()">✕</button>
+            </div>
+            <div class="input-group">
+                <label>Nombre del Ciudadano</label>
+                <input type="text" id="regNombre" placeholder="Ej: Juan Pérez">
+            </div>
+            <div class="input-group">
+                <label>Discord ID / Usuario</label>
+                <input type="text" id="regDiscord" placeholder="Ej: user#1234">
+            </div>
+            <div class="input-group">
+                <label>Número de DNI</label>
+                <input type="text" id="regDni" placeholder="Ej: 18.234.567-K">
+            </div>
+            <div class="input-group">
+                <label>Contraseña de acceso</label>
+                <input type="password" id="regPass" placeholder="••••••••">
+            </div>
+            <button class="modal-button" onclick="guardarDniEnFirebase()">Registrar / Crear DNI</button>
+            <div class="modal-note" id="estadoRegistro">Completa los datos para guardar en la base de datos.</div>
+        </div>
+    </div>
+
+    <!-- MODAL DE RECUPERAR CONTRASEÑA -->
+    <div class="modal" id="modalRecuperar">
+        <div class="modal-box">
+            <div class="modal-top">
+                <h3>Recuperar Acceso</h3>
+                <button class="close" onclick="closeModales()">✕</button>
+            </div>
+            <div class="input-group">
+                <label>Tu Discord ID</label>
+                <input type="text" id="recDiscord" placeholder="Ej: user#1234">
+            </div>
+            <button class="modal-button" style="background-color: var(--primary); color: white;" onclick="enviarRecuperacion()">Enviar Solicitud</button>
+            <div class="modal-note" id="estadoRecuperar">Ingresa tu usuario para verificar tu DNI.</div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS DE CONTROL DE INTERFAZ Y FIREBASE -->
     <script>
-        function openModal() {
-            document.getElementById('appModal').style.display = 'flex';
+        function closeModales() {
+            document.getElementById('modalRegistro').style.display = 'none';
+            document.getElementById('modalRecuperar').style.display = 'none';
         }
 
-        function closeModal() {
-            document.getElementById('appModal').style.display = 'none';
+        function openRegistro() {
+            closeModales();
+            document.getElementById('modalRegistro').style.display = 'flex';
+        }
+
+        function openRecuperar() {
+            closeModales();
+            document.getElementById('modalRecuperar').style.display = 'flex';
+        }
+
+        function intentarLogin() {
+            const discord = document.getElementById('loginDiscord').value;
+            const pass = document.getElementById('loginPass').value;
+            if(!discord || !pass) {
+                alert("Por favor completa tu usuario y contraseña.");
+                return;
+            }
+            alert("⚠️ Sesión simulada: Funcionalidad de login lista. (Para entrar al registro usa el botón de abajo)");
+        }
+
+        function enviarRecuperacion() {
+            const rec = document.getElementById('recDiscord').value;
+            if(!rec) {
+                alert("Ingresa tu Discord ID.");
+                return;
+            }
+            document.getElementById('estadoRecuperar').innerText = "✅ Solicitud enviada al sistema.";
         }
     </script>
 
@@ -216,7 +294,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Tus credenciales oficiales de Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBw2s2yliDuMxBV8jIijl0tJkGSKqaQJqg",
             authDomain: "arica-web-portal.firebaseapp.com",
@@ -228,18 +305,17 @@
             measurementId: "G-5V0QD0RY25"
         };
 
-        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Función para enviar los datos a Firestore
         window.guardarDniEnFirebase = async function() {
-            const nombre = document.getElementById('inputNombre').value;
-            const discord = document.getElementById('inputDiscord').value;
-            const dni = document.getElementById('inputDni').value;
+            const nombre = document.getElementById('regNombre').value;
+            const discord = document.getElementById('regDiscord').value;
+            const dni = document.getElementById('regDni').value;
+            const pass = document.getElementById('regPass').value;
             const estado = document.getElementById('estadoRegistro');
 
-            if (!nombre || !discord || !dni) {
+            if (!nombre || !discord || !dni || !pass) {
                 estado.innerText = "⚠️ Por favor, completa todos los campos.";
                 estado.style.color = "#ff4d5f";
                 return;
@@ -252,6 +328,7 @@
                     nombre: nombre,
                     discord: discord,
                     dni: dni,
+                    password: pass,
                     fecha: new Date().toISOString()
                 });
 
@@ -259,11 +336,12 @@
                 estado.style.color = "#40d98a";
                 
                 setTimeout(() => {
-                    closeModal();
-                    document.getElementById('inputNombre').value = '';
-                    document.getElementById('inputDiscord').value = '';
-                    document.getElementById('inputDni').value = '';
-                    estado.innerText = "Completa tus datos para registrarte oficialmente.";
+                    closeModales();
+                    document.getElementById('regNombre').value = '';
+                    document.getElementById('regDiscord').value = '';
+                    document.getElementById('regDni').value = '';
+                    document.getElementById('regPass').value = '';
+                    estado.innerText = "Completa los datos para guardar en la base de datos.";
                     estado.style.color = "#949ba4";
                 }, 2000);
 
