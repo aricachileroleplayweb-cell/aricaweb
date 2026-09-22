@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arica Chile Roleplay - Portal Oficial</title>
+    <title>Arica Chile Roleplay - Portal Ciudadano</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             margin: 0;
             overflow-x: hidden;
-            background-color: #000;
+            background-color: #05050c;
         }
         /* Video de fondo a pantalla completa con desenfoque (blur) */
         .bg-video {
@@ -82,73 +82,21 @@
             background: rgba(255, 255, 255, 0.25);
             border-radius: 3px;
         }
-
-        /* ARICA RP — REDISEÑO PREMIUM */
-        html { scroll-behavior: smooth; }
-        .hero-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -3;
-            background-image: url("hero-arica.png");
-            background-size: cover;
-            background-position: center;
-            filter: brightness(.62) saturate(.78);
-            transform: scale(1.015);
-        }
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background:
-                radial-gradient(circle at 70% 35%, rgba(30,70,95,.12), transparent 35%),
-                linear-gradient(90deg, rgba(2,5,8,.96) 0%, rgba(2,5,8,.72) 42%, rgba(2,5,8,.28) 100%),
-                linear-gradient(0deg, rgba(3,6,9,.98) 0%, rgba(3,6,9,.08) 45%, rgba(3,6,9,.62) 100%);
-            backdrop-filter: blur(1px);
-        }
-        .hero-primary, .hero-secondary {
-            display:flex; align-items:center; gap:.7rem; justify-content:center;
-            min-width:150px; padding:.85rem 1.15rem; border-radius:12px;
-            font-size:.72rem; font-weight:800; letter-spacing:.04em;
-            transition:all .25s ease;
-        }
-        .hero-primary { background:#fff; color:#080b0f; box-shadow:0 12px 35px rgba(0,0,0,.28); }
-        .hero-primary:hover { transform:translateY(-2px); box-shadow:0 18px 45px rgba(0,0,0,.4); }
-        .hero-secondary { background:rgba(10,18,25,.55); color:#fff; border:1px solid rgba(255,255,255,.18); backdrop-filter:blur(16px); }
-        .hero-secondary:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.32); transform:translateY(-2px); }
-        .server-card { background:rgba(7,13,20,.72)!important; border-color:rgba(255,255,255,.12)!important; }
-        .status-pill { display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border-radius:999px;background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.2);color:#86efac;font-size:9px;font-weight:800; }
-        .status-pill span { width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e; }
-        .quick-card {
-            min-height:116px; padding:1rem; text-align:left; border-radius:18px;
-            background:rgba(7,13,20,.78); border:1px solid rgba(255,255,255,.09);
-            backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-            display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
-            transition:all .25s ease; box-shadow:0 16px 40px rgba(0,0,0,.2);
-        }
-        .quick-card:hover { transform:translateY(-5px); border-color:rgba(255,255,255,.22); background:rgba(15,24,34,.9); }
-        .quick-icon { font-size:8px; letter-spacing:.12em; color:#b9e9ff; border:1px solid rgba(125,211,252,.2); background:rgba(56,189,248,.07); padding:.35rem .45rem; border-radius:7px; margin-bottom:auto; }
-        .quick-card b { font-size:.72rem; margin-top:1rem; color:#fff; }
-        .quick-card small { color:rgba(255,255,255,.42); font-size:.58rem; margin-top:.25rem; }
-        .tab-content { animation:tabIn .35s ease both; }
-        @keyframes tabIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-        @media (max-width: 768px) {
-            #home-hero { min-height:78vh; }
-            #home-hero h2 { font-size:3.5rem; }
-            .server-card { margin-top:1rem; }
-            .quick-card { min-height:105px; }
-        }
     </style>
 </head>
-<body class="min-h-screen text-white font-sans flex flex-col justify-between bg-[#05070a]">
+<body class="min-h-screen text-white font-sans flex flex-col justify-between">
 
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="video-overlay" aria-hidden="true"></div>
+    <!-- Video de fondo (puedes cambiar la URL del video MP4) -->
+    <video autoplay muted loop class="bg-video">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-city-traffic-at-night-4103-large.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
 
     <!-- PANTALLA DE AUTENTICACIÓN -->
     <div id="auth-screen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
         <div class="glass-card p-8 rounded-2xl w-full max-w-md space-y-6">
             <div class="text-center">
-                <img src="arica logo.png" alt="Arica RP Logo" class="w-16 h-16 rounded-full object-cover border-2 border-white/30 mx-auto mb-3 shadow-lg">
+                <img src="arica logo.png" alt="Arica RP Logo" class="w-16 h-16 rounded-full object-cover border-2 border-white/35 mx-auto mb-3 shadow-lg">
                 <h1 class="text-lg font-black tracking-widest text-white uppercase">ARICA CHILE RP</h1>
                 <p class="text-xs text-gray-300 mt-1">Portal Ciudadano Oficial</p>
             </div>
@@ -221,7 +169,6 @@
                 </div>
 
                 <nav class="flex flex-wrap justify-center gap-1.5">
-                    <button onclick="scrollToHome()" id="btn-home" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Inicio</button>
                     <button onclick="switchTab('identity')" id="btn-identity" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Identidad</button>
                     <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Banco</button>
                     <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Concesionario</button>
@@ -233,63 +180,10 @@
             </div>
         </header>
 
-        <!-- HERO SECTION -->
-        <section id="home-hero" class="relative min-h-[72vh] flex items-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/20"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-black/20"></div>
-
-            <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-10 py-20">
-                <div class="grid lg:grid-cols-[1fr_360px] gap-10 items-end">
-                    <div class="max-w-3xl">
-                        <p class="text-[11px] tracking-[0.35em] uppercase text-cyan-300/90 font-semibold mb-4">Portal Ciudadano Oficial</p>
-                        <h2 class="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tight leading-[0.88] text-white">
-                            ARICA CHILE
-                            <span class="block font-light text-white/75 tracking-[-0.03em]">ROLEPLAY</span>
-                        </h2>
-                        <p class="mt-7 max-w-xl text-sm sm:text-base leading-7 text-white/65">
-                            Vive la experiencia roleplay más completa de Arica. Gestiona tu identidad, economía, vehículos y acceso a los sistemas del servidor desde un solo lugar.
-                        </p>
-                        <div class="flex flex-wrap gap-3 mt-8">
-                            <button onclick="switchTab('identity')" class="hero-primary">Explorar Portal <span>→</span></button>
-                            <button onclick="switchTab('dealership')" class="hero-secondary">Concesionario</button>
-                        </div>
-                    </div>
-
-                    <div class="server-card glass-card rounded-3xl p-5">
-                        <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                            <div>
-                                <p class="text-[9px] tracking-[0.22em] uppercase text-white/40">Estado del servidor</p>
-                                <h3 class="text-lg font-bold mt-1">Arica Chile RP</h3>
-                            </div>
-                            <span class="status-pill"><span></span> Online</span>
-                        </div>
-                        <div class="space-y-4 pt-5">
-                            <div class="flex justify-between"><span class="text-xs text-white/45">Jugadores en línea</span><b class="text-sm">Online</b></div>
-                            <div class="flex justify-between"><span class="text-xs text-white/45">Portal</span><b class="text-sm">Operativo</b></div>
-                            <div class="flex justify-between"><span class="text-xs text-white/45">Sistema</span><b class="text-sm">v2.0</b></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- QUICK ACCESS CARDS -->
-        <section class="max-w-7xl mx-auto w-full px-6 lg:px-10 -mt-10 relative z-20">
-            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-                <button onclick="switchTab('identity')" class="quick-card"><span class="quick-icon">ID</span><b>Identidad</b><small>Personajes y DNI</small></button>
-                <button onclick="switchTab('economy')" class="quick-card"><span class="quick-icon">$</span><b>Banco</b><small>Saldo y movimientos</small></button>
-                <button onclick="switchTab('dealership')" class="quick-card"><span class="quick-icon">CAR</span><b>Concesionario</b><small>Vehículos</small></button>
-                <button onclick="switchTab('store')" class="quick-card"><span class="quick-icon">SHOP</span><b>Tienda</b><small>Productos y licencias</small></button>
-                <button onclick="switchTab('police')" class="quick-card"><span class="quick-icon">SIP</span><b>Policial</b><small>Sistema policial</small></button>
-                <button onclick="switchTab('staff')" class="quick-card"><span class="quick-icon">STAFF</span><b>Staff</b><small>Administración</small></button>
-            </div>
-        </section>
-
-        <!-- CONTENIDO DE LAS PESTAÑAS -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 flex-grow w-full z-10">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
             <!-- Pestaña Identidad -->
-            <div id="tab-identity" class="tab-content space-y-6">
+            <div id="tab-identity" class="space-y-6">
                 <div class="glass-card p-6 md:p-8 rounded-2xl">
                     <div class="text-center mb-6">
                         <h2 class="text-xl font-bold text-white tracking-wide">Registro de Identidad Ciudadana</h2>
@@ -343,7 +237,7 @@
             </div>
 
             <!-- Pestaña Banco -->
-            <div id="tab-economy" class="tab-content hidden space-y-6">
+            <div id="tab-economy" class="hidden space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
                         <div>
@@ -388,7 +282,7 @@
             </div>
 
             <!-- Pestaña Concesionario -->
-            <div id="tab-dealership" class="tab-content hidden space-y-6">
+            <div id="tab-dealership" class="hidden space-y-6">
                 <div class="glass-card p-6 rounded-2xl">
                     <div class="flex justify-between items-center mb-6">
                         <div>
@@ -401,7 +295,7 @@
             </div>
 
             <!-- Pestaña Tienda -->
-            <div id="tab-store" class="tab-content hidden space-y-6">
+            <div id="tab-store" class="hidden space-y-6">
                 <div class="glass-card p-6 rounded-2xl">
                     <div class="text-center mb-6">
                         <h2 class="text-xl font-bold text-white">Tienda Oficial de Arica RP</h2>
@@ -418,7 +312,7 @@
             </div>
 
             <!-- Pestaña Policial -->
-            <div id="tab-police" class="tab-content hidden space-y-6">
+            <div id="tab-police" class="hidden space-y-6">
                 <div class="glass-card p-6 rounded-2xl">
                     <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
                         <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
@@ -446,7 +340,7 @@
             </div>
 
             <!-- Pestaña Staff -->
-            <div id="tab-staff" class="tab-content hidden space-y-6">
+            <div id="tab-staff" class="hidden space-y-6">
                 <div class="glass-card p-6 rounded-2xl">
                     <div id="staff-login-box" class="max-w-md mx-auto space-y-4 text-center">
                         <h2 class="text-xl font-bold text-white">Panel de Administración Staff</h2>
@@ -463,6 +357,7 @@
                             <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-300 border-rose-400/30">Cerrar Sesión</button>
                         </div>
 
+                        <!-- Nueva Sección: Auditoría de Usuarios de Discord y sus DNIs -->
                         <div class="glass-card p-4 rounded-xl space-y-3 bg-slate-950/60 border border-amber-500/30">
                             <div class="flex justify-between items-center">
                                 <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider">📋 Auditoría Global: DNIs por Usuario de Discord</h3>
@@ -513,7 +408,7 @@
 
         </main>
 
-        <footer class="glass-bg py-4 px-4 text-center text-xs text-gray-300 mt-8 z-10">
+        <footer class="glass-bg py-4 px-4 text-center text-xs text-gray-300 mt-8">
             <p>&copy; 2026 Arica Chile Roleplay. Todos los derechos reservados.</p>
         </footer>
     </div>
@@ -544,10 +439,6 @@
 
         function saveGlobalState() {
             localStorage.setItem('arica_global_state', JSON.stringify(globalState));
-        }
-
-        function scrollToHome() {
-            document.getElementById('home-hero')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function switchAuthMode(mode) {
@@ -681,16 +572,10 @@
         }
 
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-
-            document.querySelectorAll('nav button').forEach(btn => {
-                if(!btn.classList.contains('text-rose-300')) {
-                    btn.classList.remove('bg-white/25', 'border-white/50');
-                }
+            ['identity', 'economy', 'dealership', 'store', 'police', 'staff'].forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
             });
-            const activeBtn = document.getElementById(`btn-${tabId}`);
-            if(activeBtn) activeBtn.classList.add('bg-white/25', 'border-white/50');
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
 
             if(tabId === 'dealership') renderDealership();
             if(tabId === 'store') renderStore();
